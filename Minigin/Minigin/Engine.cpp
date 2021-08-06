@@ -92,7 +92,6 @@ void dae::Engine::Cleanup()
 
 void dae::Engine::Run()
 {
-	Initialize();
 
 	// tell the resource manager where he can find the game data
 	ResourceManager::GetInstance().Init("../Data/");

@@ -16,5 +16,6 @@ int main(int, char* []) {
 	dae::Engine e{};
 	e.Initialize();
 	e.SetGame(CreateGame());
+	e.Run();
 	return 0;
 }
