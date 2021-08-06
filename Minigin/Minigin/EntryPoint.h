@@ -4,7 +4,7 @@
 // ReSharper disable once CppUnusedIncludeDirective
 #endif
 
-#include "MiniginEngine.h"
+#include "Engine.h"
 #include <iostream>
 #include "Game.h"
 
@@ -13,7 +13,7 @@ extern Game* CreateGame();
 
 int main(int, char* []) {
 	std::cout << "main\n";
-	dae::MiniginEngine e{};
+	dae::Engine e{};
 	e.Initialize();
 	e.SetGame(CreateGame());
 	return 0;

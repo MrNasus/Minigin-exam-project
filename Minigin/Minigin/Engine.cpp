@@ -1,5 +1,5 @@
 #include "MiniginPCH.h"
-#include "MiniginEngine.h"
+#include "Engine.h"
 #include <chrono>
 #include <thread>
 #include "InputManager.h"
@@ -28,7 +28,7 @@ void PrintSDLVersion()
 		linked.major, linked.minor, linked.patch);
 }
 
-void dae::MiniginEngine::Initialize()
+void dae::Engine::Initialize()
 {
 	PrintSDLVersion();
 
@@ -56,7 +56,7 @@ void dae::MiniginEngine::Initialize()
 /**
  * Code constructing the scene world starts here
  */
-void dae::MiniginEngine::LoadGame() const
+void dae::Engine::LoadGame() const
 {
 
 
@@ -77,12 +77,12 @@ void dae::MiniginEngine::LoadGame() const
 	scene.Add(to);
 }
 
-void dae::MiniginEngine::SetGame(Game* pGame)
+void dae::Engine::SetGame(Game* pGame)
 {
 	m_pGame = pGame;
 }
 
-void dae::MiniginEngine::Cleanup()
+void dae::Engine::Cleanup()
 {
 	Renderer::GetInstance().Destroy();
 	SDL_DestroyWindow(m_Window);
@@ -90,7 +90,7 @@ void dae::MiniginEngine::Cleanup()
 	SDL_Quit();
 }
 
-void dae::MiniginEngine::Run()
+void dae::Engine::Run()
 {
 	Initialize();
 

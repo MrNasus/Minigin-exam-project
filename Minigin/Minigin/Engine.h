@@ -4,7 +4,7 @@ struct SDL_Window;
 class Game;
 namespace dae
 {
-	class MiniginEngine
+	class Engine
 	{
 	public:
 		void Initialize();
