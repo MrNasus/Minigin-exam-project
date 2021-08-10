@@ -1,12 +1,7 @@
 #include "Minigin.h"
-
-class SanboxGame final : public Game
-{
-
-};
-
+#include "SandboxGame.h"
 
 Game* CreateGame()
 {
-	return new SanboxGame{};
+	return new SandboxGame();
 }

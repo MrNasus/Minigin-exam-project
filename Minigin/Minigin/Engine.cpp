@@ -58,7 +58,7 @@ void dae::Engine::Initialize()
  */
 void dae::Engine::LoadGame() const
 {
-
+	m_pGame->Load();
 
 	auto& scene = SceneManager::GetInstance().CreateScene("Demo");
 

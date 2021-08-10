@@ -24,3 +24,15 @@ dae::Scene& dae::SceneManager::CreateScene(const std::string& name)
 	m_Scenes.push_back(scene);
 	return *scene;
 }
+
+dae::Scene& dae::SceneManager::GetScene(const std::string& name)
+{
+	for (size_t i{}; i < m_Scenes.size(); ++i)
+	{
+		if (m_Scenes[i].get()->GetName() == name)
+		{
+			return *m_Scenes[i].get();
+		}
+	}
+	return *m_Scenes[0].get();
+}
