@@ -31,6 +31,7 @@
     <ClInclude Include="Texture2D.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Engine.h" />
+    <ClInclude Include="Logger.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Font.cpp" />
@@ -49,5 +50,6 @@
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="Engine.cpp" />
+    <ClCompile Include="Logger.cpp" />
   </ItemGroup>
 </Project>
