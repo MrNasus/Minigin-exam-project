@@ -1,5 +1,6 @@
 #pragma once
 #include "SceneManager.h"
+#include <memory>
 
 namespace dae
 {

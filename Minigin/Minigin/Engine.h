@@ -8,7 +8,6 @@ namespace dae
 	{
 	public:
 		void Initialize();
-		void LoadGame() const;
 		void SetGame(Game* pGame);
 		void Cleanup();
 		void Run();
