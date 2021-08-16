@@ -173,9 +173,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MoveComponent.cpp" />
     <ClCompile Include="SandboxGame.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MoveComponent.h" />
     <ClInclude Include="SandboxGame.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

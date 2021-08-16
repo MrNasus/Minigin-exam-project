@@ -3,8 +3,10 @@
   <ItemGroup>
     <ClCompile Include="SandboxGame.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MoveComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SandboxGame.h" />
+    <ClInclude Include="MoveComponent.h" />
   </ItemGroup>
 </Project>

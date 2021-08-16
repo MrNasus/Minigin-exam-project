@@ -38,6 +38,9 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h" />
+    <ClInclude Include="TextComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Font.cpp" />
@@ -58,5 +61,8 @@
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="TextComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
