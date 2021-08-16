@@ -1,6 +1,10 @@
 #pragma once
-class EventQueue
+namespace minigin
 {
 
-};
+	class EventQueue
+	{
 
+	};
+
+}

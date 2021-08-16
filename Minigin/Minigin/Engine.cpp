@@ -28,7 +28,7 @@ void PrintSDLVersion()
 		linked.major, linked.minor, linked.patch);
 }
 
-void dae::Engine::Initialize()
+void minigin::Engine::Initialize()
 {
 	PrintSDLVersion();
 
@@ -57,12 +57,12 @@ void dae::Engine::Initialize()
  * Code constructing the scene world starts here
  */
 
-void dae::Engine::SetGame(Game* pGame)
+void minigin::Engine::SetGame(Game* pGame)
 {
 	m_pGame = pGame;
 }
 
-void dae::Engine::Cleanup()
+void minigin::Engine::Cleanup()
 {
 	Renderer::GetInstance().Destroy();
 	SDL_DestroyWindow(m_Window);
@@ -70,7 +70,7 @@ void dae::Engine::Cleanup()
 	SDL_Quit();
 }
 
-void dae::Engine::Run()
+void minigin::Engine::Run()
 {
 
 	// tell the resource manager where he can find the game data
@@ -78,23 +78,24 @@ void dae::Engine::Run()
 
 	m_pGame->Load();
 
+	auto& renderer = Renderer::GetInstance();
+	auto& sceneManager = SceneManager::GetInstance();
+	auto& input = InputManager::GetInstance();
+
+	auto previousTime = high_resolution_clock::now();
+
+	bool doContinue = true;
+	while (doContinue)
 	{
-		auto& renderer = Renderer::GetInstance();
-		auto& sceneManager = SceneManager::GetInstance();
-		auto& input = InputManager::GetInstance();
+		const auto currentTime = high_resolution_clock::now();
 
-		bool doContinue = true;
-		while (doContinue)
-		{
-			const auto currentTime = high_resolution_clock::now();
+		doContinue = input.ProcessInput();
+		sceneManager.Update(duration_cast<duration<float>>(currentTime - previousTime).count());
+		renderer.Render();
 
-			doContinue = input.ProcessInput();
-			sceneManager.Update();
-			renderer.Render();
-
-			auto sleepTime = duration_cast<duration<float>>(currentTime + milliseconds(MsPerFrame) - high_resolution_clock::now());
-			this_thread::sleep_for(sleepTime);
-		}
+		previousTime = currentTime;
+		auto sleepTime = duration_cast<duration<float>>(currentTime + milliseconds(MsPerFrame) - high_resolution_clock::now());
+		this_thread::sleep_for(sleepTime);
 	}
 
 	Cleanup();

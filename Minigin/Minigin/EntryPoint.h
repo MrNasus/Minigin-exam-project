@@ -11,9 +11,11 @@
 //ayo somebody else fill dis in
 extern Game* CreateGame();
 
+using namespace minigin;
+
 int main(int, char* []) {
 	std::cout << "main\n";
-	dae::Engine e{};
+	Engine e{};
 	e.Initialize();
 	e.SetGame(CreateGame());
 	e.Run();

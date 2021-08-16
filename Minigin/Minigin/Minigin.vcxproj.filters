@@ -4,12 +4,12 @@
     <Filter Include="Components">
       <UniqueIdentifier>{e224df9d-7872-4a38-a56a-ae3dd0e52e75}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Structs">
+      <UniqueIdentifier>{0c085c0a-0b40-4aa7-abcb-73e8f7ecb58a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Transform2DComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="EntryPoint.h" />
@@ -26,13 +26,18 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SceneObject.h" />
     <ClInclude Include="Singleton.h" />
-    <ClInclude Include="Structs.h" />
     <ClInclude Include="TextObject.h" />
     <ClInclude Include="Texture2D.h" />
-    <ClInclude Include="Transform.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="EventQueue.h" />
+    <ClInclude Include="TransformStruct.h">
+      <Filter>Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Font.cpp" />
@@ -46,12 +51,12 @@
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="TextObject.cpp" />
     <ClCompile Include="Texture2D.cpp" />
-    <ClCompile Include="Transform.cpp" />
-    <ClCompile Include="Transform2DComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="EventQueue.cpp" />
+    <ClCompile Include="TextureComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp" />
   </ItemGroup>
 </Project>

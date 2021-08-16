@@ -1,10 +1,14 @@
 #pragma once
-class Logger final
+namespace minigin
 {
-public:
-	Logger();
-	~Logger();
 
-	void Activate();
-};
+	class Logger final
+	{
+	public:
+		Logger();
+		~Logger();
 
+		void Activate();
+	};
+
+}

@@ -2,9 +2,22 @@
 #include "Object.h"
 #include <algorithm>
 
+using namespace minigin;
+
 Object::Object()
 	: m_pComponents{}
+	, m_Transform{}
 {
+}
+
+const Transform& Object::GetTransform() const
+{
+	return m_Transform;
+}
+
+void Object::SetTransform(const Transform& transform)
+{
+	m_Transform = transform;
 }
 
 void Object::AddComponent(BaseComponent* pNewComponent)
@@ -40,8 +53,6 @@ void Object::RemoveComponent(BaseComponent* pComponent)
 	}
 
 	m_pComponents.erase(it);
-
-	pComponent->RemoveObject();
 }
 
 void Object::Awake()
@@ -49,14 +60,6 @@ void Object::Awake()
 	for (auto* pComponent : m_pComponents)
 	{
 		pComponent->Awake();
-	}
-}
-
-void Object::Start()
-{
-	for (auto* pComponent : m_pComponents)
-	{
-		pComponent->Start();
 	}
 }
 
@@ -68,18 +71,11 @@ void Object::Update(float deltaTime)
 	}
 }
 
-void Object::LateUpdate(float deltaTime)
-{
-	for (auto* pComponent : m_pComponents)
-	{
-		pComponent->LateUpdate(deltaTime);
-	}
-}
 
-void Object::Draw()
+void Object::Render()
 {
 	for (auto* pComponent : m_pComponents)
 	{
-		pComponent->Draw();
+		pComponent->Render();
 	}
 }

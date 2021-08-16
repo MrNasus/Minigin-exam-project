@@ -2,7 +2,7 @@
 struct SDL_Window;
 
 class Game;
-namespace dae
+namespace minigin
 {
 	class Engine
 	{

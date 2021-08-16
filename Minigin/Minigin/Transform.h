@@ -1,17 +1,30 @@
 #pragma once
-#pragma warning(push)
-#pragma warning (disable:4201)
-#include <glm/vec3.hpp>
-#pragma warning(pop)
+#include "BaseComponent.h"
+#include "TransformStruct.h"
 
-namespace dae
+namespace minigin
 {
-	class Transform final
+	class Transform
 	{
 	public:
-		const glm::vec3& GetPosition() const { return m_Position; }
-		void SetPosition(float x, float y, float z);
-	private:
-		glm::vec3 m_Position;
+		Transform();
+		virtual ~Transform();
+		Transform(const Transform& other);
+		Transform(Transform&& other) = delete;
+		Transform& operator=(const Transform& other);
+		Transform& operator=(Transform&& other) = delete;
+
+		virtual const Transform2D& GetTransform() const;
+		virtual const Position2D& GetPosition() const;
+		virtual const Scale2D& GetScale() const;
+		virtual const Rotation2D& GetRotation() const;
+
+		virtual void SetPosition(const Position2D& position);
+		virtual void SetScale(const Scale2D& scale);
+		virtual void SetRotation(const Rotation2D& rotation);
+		virtual void SetTransform(const Transform2D& transform);
+
+	protected:
+		Transform2D m_Transform;
 	};
 }

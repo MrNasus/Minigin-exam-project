@@ -2,17 +2,19 @@
 #include "SceneManager.h"
 #include <memory>
 
-namespace dae
+namespace minigin
 {
 	class SceneObject;
+	class Object;
 	class Scene
 	{
 		friend Scene& SceneManager::CreateScene(const std::string& name);
 	public:
 		void Add(const std::shared_ptr<SceneObject>& object);
+		void Add(const std::shared_ptr<Object>& object);
 		const std::string& GetName() const;
 
-		void Update();
+		void Update(float deltaTime);
 		void Render() const;
 
 		~Scene();
@@ -25,7 +27,8 @@ namespace dae
 		explicit Scene(const std::string& name);
 
 		std::string m_Name;
-		std::vector < std::shared_ptr<SceneObject>> m_Objects{};
+		std::vector < std::shared_ptr<SceneObject>> m_SceneObjects{};
+		std::vector < std::shared_ptr<Object>> m_Objects{};
 
 		static unsigned int m_IdCounter; 
 	};

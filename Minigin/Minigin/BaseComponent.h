@@ -1,25 +1,25 @@
 #pragma once
+#include <memory>
 
-class Object;
-class BaseComponent
+namespace minigin
 {
-public:
-	BaseComponent(Object* object) { m_pObject = object; };
-	virtual ~BaseComponent() = default;
-	BaseComponent(const BaseComponent& other) = delete;
-	BaseComponent(BaseComponent&& other) = delete;
-	BaseComponent& operator=(const BaseComponent& other) = delete;
-	BaseComponent& operator=(BaseComponent&& other) = delete;
+	class Object;
+	class BaseComponent
+	{
+	public:
+		BaseComponent(const std::shared_ptr<Object>& object) { m_pObject = object; };
+		virtual ~BaseComponent() = default;
+		BaseComponent(const BaseComponent& other) = delete;
+		BaseComponent(BaseComponent&& other) = delete;
+		BaseComponent& operator=(const BaseComponent& other) = delete;
+		BaseComponent& operator=(BaseComponent&& other) = delete;
 
-	void RemoveObject() { m_pObject = nullptr; };
+		virtual void Awake() = 0;
+		virtual void Update(float deltaTime) = 0;
+		virtual void Render() = 0;
 
-	virtual void Awake() = 0;
-	virtual void Start() = 0;
-	virtual void Update(float deltaTime) = 0;
-	virtual void LateUpdate(float deltaTime) = 0;
-	virtual void Draw() = 0;
+	protected:
 
-protected:
-
-	Object* m_pObject;
-};
+		std::shared_ptr<Object> m_pObject;
+	};
+}

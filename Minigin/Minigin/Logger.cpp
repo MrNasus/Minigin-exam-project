@@ -2,6 +2,8 @@
 #include "Logger.h"
 #include <iostream>
 
+using namespace minigin;
+
 Logger::Logger()
 {
 }

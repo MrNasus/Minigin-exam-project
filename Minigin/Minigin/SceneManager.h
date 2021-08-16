@@ -4,7 +4,7 @@
 #include <vector>
 #include <memory>
 
-namespace dae
+namespace minigin
 {
 	class Scene;
 	class SceneManager final : public Singleton<SceneManager>
@@ -13,7 +13,7 @@ namespace dae
 		Scene& CreateScene(const std::string& name);
 		Scene& GetScene(const std::string& name);
 
-		void Update();
+		void Update(float deltaTime);
 		void Render();
 	private:
 		friend class Singleton<SceneManager>;
