@@ -25,7 +25,7 @@ namespace minigin
 		const Transform& GetTransform() const;
 		void SetTransform(const Transform & transform);
 
-		void SetTextVisible(bool isVisible);
+		void SetVisible(bool isVisible);
 
 	private:
 		std::shared_ptr<Texture2D> m_pTexture{};

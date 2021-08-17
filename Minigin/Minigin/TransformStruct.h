@@ -2,7 +2,7 @@
 
 namespace minigin
 {
-	struct Rotation2D
+	struct Rotation2DDEG
 	{
 		float z = 0.f;
 	};
@@ -22,7 +22,7 @@ namespace minigin
 	struct Transform2D
 	{
 		Position2D position;
-		Rotation2D rotation;
+		Rotation2DDEG rotation;
 		Scale2D scale;
 	};
 }

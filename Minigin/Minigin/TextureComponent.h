@@ -23,8 +23,11 @@ namespace minigin
 		const Transform& GetTransform() const;
 		void SetTransform(const Transform& transform);
 
+		void SetVisible(bool isVisible);
+
 	private:
 		std::shared_ptr<Texture2D> m_pTexture{};
 		Transform m_Transform;
+		bool m_IsVisible;
 	};
 }

@@ -4,6 +4,7 @@
 #include "Renderer.h"
 #include "Font.h"
 #include "Texture2D.h"
+#include "Object.h"
 
 #include <SDL.h>
 #include <SDL_ttf.h>
@@ -44,8 +45,8 @@ void TextComponent::Render()
 {
 	if (m_pTexture != nullptr && m_IsVisible)
 	{
-		const auto pos = m_Transform.GetPosition();
-		Renderer::GetInstance().RenderTexture(*m_pTexture, pos.x, pos.y);
+		Transform objTrans{ m_pObject->GetTransform() };
+		Renderer::GetInstance().RenderTexture(*m_pTexture, objTrans.GetPosition().x + m_Transform.GetPosition().x, objTrans.GetPosition().y + m_Transform.GetPosition().y);
 	}
 }
 
@@ -59,7 +60,7 @@ void TextComponent::SetTransform(const Transform& transform)
 	m_Transform = transform;
 }
 
-void TextComponent::SetTextVisible(bool isVisible)
+void TextComponent::SetVisible(bool isVisible)
 {
 	m_IsVisible = isVisible;
 }

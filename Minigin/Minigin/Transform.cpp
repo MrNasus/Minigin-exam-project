@@ -39,7 +39,7 @@ const Scale2D& Transform::GetScale() const
 	return m_Transform.scale;
 }
 
-const Rotation2D& Transform::GetRotation() const
+const Rotation2DDEG& Transform::GetRotation() const
 {
 	return m_Transform.rotation;
 }
@@ -54,7 +54,7 @@ void Transform::SetScale(const Scale2D& scale)
 	m_Transform.scale = scale;
 }
 
-void Transform::SetRotation(const Rotation2D& rotation)
+void Transform::SetRotation(const Rotation2DDEG& rotation)
 {
 	m_Transform.rotation = rotation;
 }
