@@ -1,5 +1,6 @@
 #pragma once
 #include "Singleton.h"
+#include "HitboxStruct.h"
 
 struct SDL_Window;
 struct SDL_Renderer;
@@ -19,6 +20,7 @@ namespace minigin
 
 		void RenderTexture(const Texture2D& texture, float x, float y) const;
 		void RenderTexture(const Texture2D& texture, float x, float y, float width, float height) const;
+		void RenderTexture(const Texture2D& texture, const Rectangle& src, const Rectangle& dst, float angleDEG) const;
 
 		SDL_Renderer* GetSDLRenderer() const { return m_Renderer; }
 	private:

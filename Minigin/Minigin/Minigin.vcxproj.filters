@@ -41,6 +41,16 @@
     <ClInclude Include="TextComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="HitboxStruct.h">
+      <Filter>Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="HitboxCircleComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="HitboxRectangleComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Font.cpp" />
@@ -64,5 +74,14 @@
     <ClCompile Include="TextComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="HitboxCircleComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="HitboxRectangleComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Minigin.rc" />
   </ItemGroup>
 </Project>
