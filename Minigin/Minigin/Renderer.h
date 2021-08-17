@@ -19,7 +19,8 @@ namespace minigin
 		void Destroy();
 
 		void RenderTexture(const Texture2D& texture, float x, float y) const;
-		void RenderTexture(const Texture2D& texture, float x, float y, float width, float height) const;
+		void RenderTexture(const Texture2D& texture, const Rectangle& dst) const;
+		void RenderTexture(const Texture2D& texture, const Rectangle& src, const Rectangle& dst) const;
 		void RenderTexture(const Texture2D& texture, const Rectangle& src, const Rectangle& dst, float angleDEG) const;
 
 		SDL_Renderer* GetSDLRenderer() const { return m_Renderer; }

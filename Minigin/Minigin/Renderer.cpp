@@ -48,25 +48,26 @@ void minigin::Renderer::Destroy()
 
 void minigin::Renderer::RenderTexture(const Texture2D& texture, const float x, const float y) const
 {
-	int w;
-	int h;
-	SDL_FRect dst;
-	dst.x = x;
-	dst.y = y;
-	SDL_QueryTexture(texture.GetSDLTexture(), nullptr, nullptr, &w, &h);
-	dst.w = static_cast<float>(w);
-	dst.h = static_cast<float>(h);
-	SDL_RenderCopyF(GetSDLRenderer(), texture.GetSDLTexture(), nullptr, &dst);
+	SDL_Rect dst;
+	dst.x = static_cast<int>(x);
+	dst.y = static_cast<int>(y);
+	SDL_QueryTexture(texture.GetSDLTexture(), nullptr, nullptr, &dst.w, &dst.h);
+	SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), nullptr, &dst);
 }
 
-void minigin::Renderer::RenderTexture(const Texture2D& texture, const float x, const float y, const float width, const float height) const
+void minigin::Renderer::RenderTexture(const Texture2D& texture, const Rectangle& dst) const
 {
-	SDL_FRect dst;
-	dst.x = x;
-	dst.y = y;
-	dst.w = width;
-	dst.h = height;
-	SDL_RenderCopyF(GetSDLRenderer(), texture.GetSDLTexture(), nullptr, &dst);
+	SDL_Rect dstRect;
+	dstRect.x = static_cast<int>(dst.x);
+	dstRect.y = static_cast<int>(dst.y);
+	dstRect.w = static_cast<int>(dst.width);
+	dstRect.h = static_cast<int>(dst.height);
+	SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), nullptr, &dstRect);
+}
+
+void minigin::Renderer::RenderTexture(const Texture2D& texture, const Rectangle& src, const Rectangle& dst) const
+{
+	RenderTexture(texture, src, dst, 0.f);
 }
 
 void minigin::Renderer::RenderTexture(const Texture2D& texture, const Rectangle& src, const Rectangle& dst, float angleDEG) const
@@ -77,11 +78,11 @@ void minigin::Renderer::RenderTexture(const Texture2D& texture, const Rectangle&
 	srcRect.w = static_cast<int>(src.width);
 	srcRect.h = static_cast<int>(src.height);
 
-	SDL_FRect dstRect;
-	dstRect.x = dst.x;
-	dstRect.y = dst.y;
-	dstRect.w = dst.width;
-	dstRect.h = dst.height;
+	SDL_Rect dstRect;
+	dstRect.x = static_cast<int>(dst.x);
+	dstRect.y = static_cast<int>(dst.y);
+	dstRect.w = static_cast<int>(dst.width);
+	dstRect.h = static_cast<int>(dst.height);
 
-	SDL_RenderCopyExF(GetSDLRenderer(), texture.GetSDLTexture(), &srcRect, &dstRect, angleDEG, nullptr, SDL_FLIP_NONE);
+	SDL_RenderCopyEx(GetSDLRenderer(), texture.GetSDLTexture(), &srcRect, &dstRect, angleDEG, nullptr, SDL_FLIP_NONE);
 }

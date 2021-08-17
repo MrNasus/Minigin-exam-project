@@ -20,14 +20,14 @@ void Object::SetTransform(const Transform& transform)
 	m_Transform = transform;
 }
 
-void Object::AddComponent(BaseComponent* pNewComponent)
+void Object::AddComponent(const std::shared_ptr<BaseComponent>& pNewComponent)
 {
 	if (!pNewComponent)
 	{
 		return;
 	}
 
-	for (auto* pComponent : m_pComponents)
+	for (std::shared_ptr<BaseComponent> pComponent : m_pComponents)
 	{
 		if (pComponent == pNewComponent)
 		{
@@ -38,7 +38,7 @@ void Object::AddComponent(BaseComponent* pNewComponent)
 	m_pComponents.push_back(pNewComponent);
 }
 
-void Object::RemoveComponent(BaseComponent* pComponent)
+void Object::RemoveComponent(const std::shared_ptr<BaseComponent>& pComponent)
 {
 	if (!pComponent)
 	{
@@ -57,7 +57,7 @@ void Object::RemoveComponent(BaseComponent* pComponent)
 
 void Object::Awake()
 {
-	for (auto* pComponent : m_pComponents)
+	for (auto pComponent : m_pComponents)
 	{
 		pComponent->Awake();
 	}
@@ -65,7 +65,7 @@ void Object::Awake()
 
 void Object::Update(float deltaTime)
 {
-	for (auto* pComponent : m_pComponents)
+	for (auto pComponent : m_pComponents)
 	{
 		pComponent->Update(deltaTime);
 	}
@@ -74,7 +74,7 @@ void Object::Update(float deltaTime)
 
 void Object::Render()
 {
-	for (auto* pComponent : m_pComponents)
+	for (auto pComponent : m_pComponents)
 	{
 		pComponent->Render();
 	}

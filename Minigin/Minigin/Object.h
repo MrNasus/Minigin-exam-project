@@ -2,6 +2,7 @@
 #include "BaseComponent.h"
 #include "Transform.h"
 #include <vector>
+#include <memory>
 
 namespace minigin
 {
@@ -18,17 +19,17 @@ namespace minigin
 		const Transform& GetTransform() const;
 		void SetTransform(const Transform& transform);
 
-		void AddComponent(BaseComponent* pNewComponent);
-		void RemoveComponent(BaseComponent* pComponent);
+		void AddComponent(const std::shared_ptr<BaseComponent>& pNewComponent);
+		void RemoveComponent(const std::shared_ptr<BaseComponent>& pComponent);
 		template <class T>
-		T* GetComponent()
+		std::weak_ptr<T> GetComponent()
 		{
 			const type_info& ti = typeid(T);
-			for (auto* component : m_pComponents)
+			for (std::shared_ptr<BaseComponent> component : m_pComponents)
 			{
 				if (component && typeid(*component) == ti)
 				{
-					return static_cast<T*>(component);
+					return std::weak_ptr<T> = component;
 				}
 			}
 
@@ -41,7 +42,7 @@ namespace minigin
 	protected:
 
 	private:
-		std::vector<BaseComponent*> m_pComponents;
+		std::vector<std::shared_ptr<BaseComponent>> m_pComponents;
 		Transform m_Transform;
 	};
 }
