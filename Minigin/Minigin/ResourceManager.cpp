@@ -8,7 +8,9 @@
 #include "Texture2D.h"
 #include "Font.h"
 
-void minigin::ResourceManager::Init(const std::string& dataPath)
+using namespace minigin;
+
+void ResourceManager::Init(const std::string& dataPath)
 {
 	m_DataPath = dataPath;
 
@@ -30,18 +32,22 @@ void minigin::ResourceManager::Init(const std::string& dataPath)
 	}
 }
 
-std::shared_ptr<minigin::Texture2D> minigin::ResourceManager::LoadTexture(const std::string& file) const
+const std::shared_ptr<Texture2D>& ResourceManager::LoadTexture(const std::string& file)
 {
 	const auto fullPath = m_DataPath + file;
-	auto texture = IMG_LoadTexture(Renderer::GetInstance().GetSDLRenderer(), fullPath.c_str());
-	if (texture == nullptr) 
+	if (m_pTextures.find(file) == m_pTextures.end())
 	{
-		throw std::runtime_error(std::string("Failed to load texture: ") + SDL_GetError());
+		auto texture = IMG_LoadTexture(Renderer::GetInstance().GetSDLRenderer(), fullPath.c_str());
+		if (texture == nullptr)
+		{
+			throw std::runtime_error(std::string("Failed to load texture: ") + SDL_GetError());
+		}
+		m_pTextures[file] = std::make_shared<Texture2D>(texture);
 	}
-	return std::make_shared<Texture2D>(texture);
+	return m_pTextures[file];
 }
 
-std::shared_ptr<minigin::Font> minigin::ResourceManager::LoadFont(const std::string& file, unsigned int size) const
+std::shared_ptr<Font> ResourceManager::LoadFont(const std::string& file, unsigned int size) const
 {
 	return std::make_shared<Font>(m_DataPath + file, size);
 }

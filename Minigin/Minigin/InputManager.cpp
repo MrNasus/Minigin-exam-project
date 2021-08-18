@@ -2,8 +2,9 @@
 #include "InputManager.h"
 #include <SDL.h>
 
+using namespace minigin;
 
-bool minigin::InputManager::ProcessInput()
+bool InputManager::ProcessInput()
 {
 	ZeroMemory(&m_CurrentState, sizeof(XINPUT_STATE));
 	XInputGetState(0, &m_CurrentState);
@@ -24,7 +25,7 @@ bool minigin::InputManager::ProcessInput()
 	return true;
 }
 
-bool minigin::InputManager::IsPressed(ControllerButton button) const
+bool InputManager::IsPressed(ControllerButton button) const
 {
 	switch (button)
 	{

@@ -1,14 +1,9 @@
 #pragma once
 
-#if _DEBUG
-// ReSharper disable once CppUnusedIncludeDirective
-#endif
-
 #include "Engine.h"
 #include <iostream>
 #include "Game.h"
 
-//ayo somebody else fill dis in
 extern Game* CreateGame();
 
 using namespace minigin;

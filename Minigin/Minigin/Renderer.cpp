@@ -4,6 +4,8 @@
 #include "SceneManager.h"
 #include "Texture2D.h"
 
+using namespace minigin;
+
 int GetOpenGLDriverIndex()
 {
 	auto openglIndex = -1;
@@ -18,7 +20,7 @@ int GetOpenGLDriverIndex()
 	return openglIndex;
 }
 
-void minigin::Renderer::Init(SDL_Window * window)
+void Renderer::Init(SDL_Window * window)
 {
 	m_Window = window;
 	m_Renderer = SDL_CreateRenderer(window, GetOpenGLDriverIndex(), SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
@@ -28,7 +30,7 @@ void minigin::Renderer::Init(SDL_Window * window)
 	}
 }
 
-void minigin::Renderer::Render() const
+void Renderer::Render() const
 {
 	SDL_RenderClear(m_Renderer);
 
@@ -37,7 +39,7 @@ void minigin::Renderer::Render() const
 	SDL_RenderPresent(m_Renderer);
 }
 
-void minigin::Renderer::Destroy()
+void Renderer::Destroy()
 {
 	if (m_Renderer != nullptr)
 	{
@@ -46,7 +48,7 @@ void minigin::Renderer::Destroy()
 	}
 }
 
-void minigin::Renderer::RenderTexture(const Texture2D& texture, const float x, const float y) const
+void Renderer::RenderTexture(const Texture2D& texture, const float x, const float y) const
 {
 	SDL_Rect dst;
 	dst.x = static_cast<int>(x);
@@ -55,7 +57,7 @@ void minigin::Renderer::RenderTexture(const Texture2D& texture, const float x, c
 	SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), nullptr, &dst);
 }
 
-void minigin::Renderer::RenderTexture(const Texture2D& texture, const Rectangle& dst) const
+void Renderer::RenderTexture(const Texture2D& texture, const Rectangle& dst) const
 {
 	SDL_Rect dstRect;
 	dstRect.x = static_cast<int>(dst.x);
@@ -65,12 +67,12 @@ void minigin::Renderer::RenderTexture(const Texture2D& texture, const Rectangle&
 	SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), nullptr, &dstRect);
 }
 
-void minigin::Renderer::RenderTexture(const Texture2D& texture, const Rectangle& src, const Rectangle& dst) const
+void Renderer::RenderTexture(const Texture2D& texture, const Rectangle& src, const Rectangle& dst) const
 {
 	RenderTexture(texture, src, dst, 0.f);
 }
 
-void minigin::Renderer::RenderTexture(const Texture2D& texture, const Rectangle& src, const Rectangle& dst, float angleDEG) const
+void Renderer::RenderTexture(const Texture2D& texture, const Rectangle& src, const Rectangle& dst, float angleDEG) const
 {
 	SDL_Rect srcRect;
 	srcRect.x = static_cast<int>(src.x);

@@ -13,11 +13,14 @@ namespace minigin
 		Scene& CreateScene(const std::string& name);
 		Scene& GetScene(const std::string& name);
 
+		void SetCurrentScene(const std::string& name);
+
 		void Update(float deltaTime);
 		void Render();
 	private:
 		friend class Singleton<SceneManager>;
 		SceneManager() = default;
-		std::vector<std::shared_ptr<Scene>> m_Scenes;
+		std::vector<std::shared_ptr<Scene>> m_pScenes;
+		std::shared_ptr<Scene> m_pCurrentScene;
 	};
 }

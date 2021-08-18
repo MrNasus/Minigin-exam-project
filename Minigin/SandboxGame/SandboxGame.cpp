@@ -34,7 +34,7 @@ void SandboxGame::Load()
 
 	o = std::make_shared<Object>();
 	o->AddComponent(std::make_shared<MoveComponent>(o, Position2D{ 4.f, 16.f}));
-	o->AddComponent(std::make_shared<TextureComponent>(o, "logo.png"));
+	o->AddComponent(std::make_shared<TextureComponent>(o, "GalagaLogo.png"));
 	Transform t{};
 	t.SetPosition(Position2D{ 216.f, 180.f });
 	o->SetTransform(t);
@@ -42,7 +42,7 @@ void SandboxGame::Load()
 
 	o = std::make_shared<Object>();
 	o->AddComponent(std::make_shared<MoveComponent>(o, Position2D{ 8.f, -30.f}));
-	o->AddComponent(std::make_shared<SpriteComponent>(o, "logo.png", 2, 1.f));
+	o->AddComponent(std::make_shared<SpriteComponent>(o, "BossGreen.png", 2, 1.f));
 	t.SetPosition(Position2D{ 216.f, 350.f });
 	t.SetRotation(Rotation2DDEG{ 35.f });
 	o->SetTransform(t);
@@ -50,7 +50,7 @@ void SandboxGame::Load()
 
 	o = std::make_shared<Object>();
 	o->AddComponent(std::make_shared<MoveComponent>(o, Position2D{ 1.f, 45.f }));
-	o->AddComponent(std::make_shared<TextComponent>(o, "Programming 4 Assignment", "Lingua.otf", 36));
+	o->AddComponent(std::make_shared<TextComponent>(o, "Galaga Space Defense", "Lingua.otf", 36));
 	t.SetPosition(Position2D{ 80.f, 20.f });
 	t.SetRotation(Rotation2DDEG{ 0.f });
 	o->SetTransform(t);

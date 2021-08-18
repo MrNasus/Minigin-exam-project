@@ -14,7 +14,7 @@ void Scene::Add(const std::shared_ptr<Object>& object)
 	m_Objects.push_back(object);
 }
 
-const std::string& minigin::Scene::GetName() const
+const std::string& Scene::GetName() const
 {
 	return m_Name;
 }

@@ -12,6 +12,7 @@
 
 using namespace std;
 using namespace std::chrono;
+using namespace minigin;
 
 void PrintSDLVersion()
 {
@@ -26,7 +27,7 @@ void PrintSDLVersion()
 		linked.major, linked.minor, linked.patch);
 }
 
-void minigin::Engine::Initialize()
+void Engine::Initialize()
 {
 	PrintSDLVersion();
 
@@ -55,12 +56,12 @@ void minigin::Engine::Initialize()
  * Code constructing the scene world starts here
  */
 
-void minigin::Engine::SetGame(Game* pGame)
+void Engine::SetGame(Game* pGame)
 {
 	m_pGame = pGame;
 }
 
-void minigin::Engine::Cleanup()
+void Engine::Cleanup()
 {
 	Renderer::GetInstance().Destroy();
 	SDL_DestroyWindow(m_Window);
@@ -68,7 +69,7 @@ void minigin::Engine::Cleanup()
 	SDL_Quit();
 }
 
-void minigin::Engine::Run()
+void Engine::Run()
 {
 
 	// tell the resource manager where he can find the game data
