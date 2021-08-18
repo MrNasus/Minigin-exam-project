@@ -13,6 +13,7 @@ SpriteComponent::SpriteComponent(const std::shared_ptr<Object>& object, const st
 	,m_AccuSec{}
 	,m_CurrentFrame{}
 	,m_FrameWidth{}
+	,m_FrameHeight{}
 	,m_IsVisible{true}
 	,m_NrOfFrames{nrOfFrames}
 	,m_pTexture{ ResourceManager::GetInstance().LoadTexture(filename) }
@@ -23,6 +24,11 @@ SpriteComponent::SpriteComponent(const std::shared_ptr<Object>& object, const st
 {
 	SDL_QueryTexture(m_pTexture->GetSDLTexture(), nullptr, nullptr, &m_TextureWidth, &m_TextureHeight);
 	m_FrameWidth = m_TextureWidth / m_NrOfFrames;
+	m_FrameHeight = m_TextureHeight;
+
+	//offset transform to center texture
+	m_Transform.SetPosition(Position2D{ -(float(m_FrameWidth) / 2.f), -(float(m_FrameHeight) / 2.f) });
+
 }
 
 void SpriteComponent::Update(float deltaTime)
@@ -43,8 +49,8 @@ void SpriteComponent::Render()
 	if (m_pTexture != nullptr && m_IsVisible)
 	{
 		Transform objTrans{ m_pObject->GetTransform() };
-		Rectangle dst = { objTrans.GetPosition().x + m_Transform.GetPosition().x, objTrans.GetPosition().y + m_Transform.GetPosition().y, float(m_FrameWidth), float(m_TextureHeight) };
-		Rectangle src = { float(m_FrameWidth * m_CurrentFrame), 0.f, float(m_FrameWidth), float(m_TextureHeight) };
+		Rectangle dst = { objTrans.GetPosition().x + m_Transform.GetPosition().x, objTrans.GetPosition().y + m_Transform.GetPosition().y, float(m_FrameWidth), float(m_FrameHeight) };
+		Rectangle src = { float(m_FrameWidth * m_CurrentFrame), 0.f, float(m_FrameWidth), float(m_FrameHeight) };
 		
 		Renderer::GetInstance().RenderTexture(*m_pTexture, src, dst, m_Transform.GetRotation().z + objTrans.GetRotation().z);
 	}
@@ -58,6 +64,26 @@ const Transform& SpriteComponent::GetTransform() const
 void SpriteComponent::SetTransform(const Transform& transform)
 {
 	m_Transform = transform;
+}
+
+int minigin::SpriteComponent::GetFrameHeight() const
+{
+	return m_FrameHeight;
+}
+
+int minigin::SpriteComponent::GetFrameWidth() const
+{
+	return m_FrameWidth;
+}
+
+float minigin::SpriteComponent::GetTextureHeight() const
+{
+	return float(m_TextureHeight);
+}
+
+void minigin::SpriteComponent::SetFrameHeight(int height)
+{
+	m_FrameHeight = height;
 }
 
 void SpriteComponent::SetVisible(bool isVisible)

@@ -25,6 +25,12 @@ namespace minigin
 		const Transform& GetTransform() const;
 		void SetTransform(const Transform & transform);
 
+		int GetFrameHeight() const;
+		int GetFrameWidth() const;
+		float GetTextureHeight() const;
+
+		void SetFrameHeight(int height);
+
 		void SetVisible(bool isVisible);
 
 	private:
@@ -36,6 +42,7 @@ namespace minigin
 		int m_TextureHeight;
 
 		int m_FrameWidth;
+		int m_FrameHeight;
 
 		int m_NrOfFrames;
 		int m_CurrentFrame;

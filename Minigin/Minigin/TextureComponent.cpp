@@ -10,7 +10,13 @@ TextureComponent::TextureComponent(const std::shared_ptr<Object>& object, const 
 	: BaseComponent{ object }
 	, m_pTexture{ ResourceManager::GetInstance().LoadTexture(filename) }
 	, m_IsVisible{true}
+	, m_Transform{}
 {
+	//offset transform to center texture
+	int width{};
+	int height{};
+	Renderer::GetInstance().GetTextureSize(*m_pTexture, width, height);
+	m_Transform.SetPosition(Position2D{ -(float(width) / 2.f), -(float(height) / 2.f) });
 }
 
 void TextureComponent::Render()

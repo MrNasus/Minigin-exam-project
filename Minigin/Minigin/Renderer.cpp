@@ -48,6 +48,11 @@ void Renderer::Destroy()
 	}
 }
 
+void minigin::Renderer::GetTextureSize(const Texture2D& texture, int& width, int& height) const
+{
+	SDL_QueryTexture(texture.GetSDLTexture(), nullptr, nullptr, &width, &height);
+}
+
 void Renderer::RenderTexture(const Texture2D& texture, const float x, const float y) const
 {
 	SDL_Rect dst;

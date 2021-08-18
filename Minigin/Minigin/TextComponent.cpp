@@ -39,6 +39,12 @@ TextComponent::TextComponent(const std::shared_ptr<Object>& object, const std::s
 	}
 	SDL_FreeSurface(surf);
 	m_pTexture = std::make_shared<Texture2D>(texture);
+
+	//offset transform to center texture
+	int width{};
+	int height{};
+	Renderer::GetInstance().GetTextureSize(*m_pTexture, width, height);
+	m_Transform.SetPosition(Position2D{ -(float(width) / 2.f), -(float(height) / 2.f) });
 }
 
 void TextComponent::Render()
