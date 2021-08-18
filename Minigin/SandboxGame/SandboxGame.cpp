@@ -50,7 +50,7 @@ void SandboxGame::Load()
 
 	o = std::make_shared<Object>();
 	o->AddComponent(std::make_shared<MoveComponent>(o, Position2D{ 1.f, 45.f }));
-	o->AddComponent(std::make_shared<TextComponent>(o, "Galaga Space Defense", "Lingua.otf", 36));
+	o->AddComponent(std::make_shared<TextComponent>(o, "PRESS START", "Emulogic.ttf", 24));
 	t.SetPosition(Position2D{ 80.f, 20.f });
 	t.SetRotation(Rotation2DDEG{ 0.f });
 	o->SetTransform(t);
