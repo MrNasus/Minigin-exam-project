@@ -120,6 +120,42 @@ void SandboxGame::Load()
 	menuButton->SetTransform(t);
 	pauseMenu.Add(menuButton);
 
+	//GAME END
+	Scene& GameEnd = SceneManager::GetInstance().CreateScene("End");
 
-	SceneManager::GetInstance().SetCurrentScene("Pause");
+	std::shared_ptr<Object> galagaVisual = std::make_shared<Object>();
+	galagaVisual->AddComponent(std::make_shared<TextureComponent>(galagaVisual, "GalagaLogo.png"));
+	t.SetPosition(Position2D{ 320.f, 130.f });
+	galagaVisual->SetTransform(t);
+	GameEnd.Add(galagaVisual);
+
+	std::shared_ptr<Object> resultVisual = std::make_shared<Object>();
+	resultVisual->AddComponent(std::make_shared<TextComponent>(resultVisual, "---RESULT---", "Emulogic.ttf", 24, 220, 220, 0));
+	t.SetPosition(Position2D{ 320.f, 270.f });
+	resultVisual->SetTransform(t);
+	GameEnd.Add(resultVisual);
+
+	std::shared_ptr<Object> totalShotsVisual = std::make_shared<Object>();
+	totalShotsVisual->AddComponent(std::make_shared<TextComponent>(totalShotsVisual, "TOTAL SHOTS: 100", "Emulogic.ttf", 24, 220, 220, 220));
+	t.SetPosition(Position2D{ 320.f, 320.f });
+	totalShotsVisual->SetTransform(t);
+	GameEnd.Add(totalShotsVisual);
+
+	std::shared_ptr<Object> shotsHitVisual = std::make_shared<Object>();
+	shotsHitVisual->AddComponent(std::make_shared<TextComponent>(shotsHitVisual, "SHOTS HIT: 36", "Emulogic.ttf", 24, 220, 220, 220));
+	t.SetPosition(Position2D{ 320.f, 370.f });
+	shotsHitVisual->SetTransform(t);
+	GameEnd.Add(shotsHitVisual);
+
+	std::shared_ptr<Object> hitMissVisual = std::make_shared<Object>();
+	hitMissVisual->AddComponent(std::make_shared<TextComponent>(hitMissVisual, "HIT MISS RATIO: 36%", "Emulogic.ttf", 24, 220, 220, 220));
+	t.SetPosition(Position2D{ 320.f, 420.f });
+	hitMissVisual->SetTransform(t);
+	GameEnd.Add(hitMissVisual);
+
+
+
+	SceneManager::GetInstance().SetCurrentScene("End");
+
+	std::cout << "Sandbox game loaded\n";
 }
