@@ -7,6 +7,7 @@
 #include "MoveComponent.h"
 #include "TextComponent.h"
 #include "SpriteComponent.h"
+#include "ServiceLocator.h"
 #include <memory>
 #include <iostream>
 
@@ -25,9 +26,10 @@ SandboxGame::~SandboxGame()
 
 void SandboxGame::Load()
 {
+	SceneManager* sceneManager = ServiceLocator<SceneManager>::getService();
 	Transform t{};
 	//MAIN MENU
-	Scene& mainMenu = SceneManager::GetInstance().CreateScene("Menu");
+	Scene& mainMenu = sceneManager->CreateScene("Menu");
 
 	std::shared_ptr<Object> galagaTitle = std::make_shared<Object>();
 	galagaTitle->AddComponent(std::make_shared<TextureComponent>(galagaTitle, "GalagaLogo.png"));
@@ -60,7 +62,7 @@ void SandboxGame::Load()
 	mainMenu.Add(quitButton);
 
 	//GAME
-	Scene& game = SceneManager::GetInstance().CreateScene("Game");
+	Scene& game = sceneManager->CreateScene("Game");
 
 	std::shared_ptr<Object> starfighter = std::make_shared<Object>();
 	starfighter->AddComponent(std::make_shared<TextureComponent>(starfighter, "StarfighterWhite.png"));
@@ -106,7 +108,7 @@ void SandboxGame::Load()
 
 
 	//PAUSE SCREEN
-	Scene& pauseMenu = SceneManager::GetInstance().CreateScene("Pause");
+	Scene& pauseMenu = sceneManager->CreateScene("Pause");
 
 	std::shared_ptr<Object> resumeButton = std::make_shared<Object>();
 	resumeButton->AddComponent(std::make_shared<TextComponent>(resumeButton, "RESUME", "Emulogic.ttf", 30, 220, 220, 220));
@@ -121,7 +123,7 @@ void SandboxGame::Load()
 	pauseMenu.Add(menuButton);
 
 	//GAME END
-	Scene& GameEnd = SceneManager::GetInstance().CreateScene("End");
+	Scene& GameEnd = sceneManager->CreateScene("End");
 
 	std::shared_ptr<Object> galagaVisual = std::make_shared<Object>();
 	galagaVisual->AddComponent(std::make_shared<TextureComponent>(galagaVisual, "GalagaLogo.png"));
@@ -155,7 +157,7 @@ void SandboxGame::Load()
 
 
 
-	SceneManager::GetInstance().SetCurrentScene("End");
+	sceneManager->SetCurrentScene("Pause");
 
 	std::cout << "Sandbox game loaded\n";
 }

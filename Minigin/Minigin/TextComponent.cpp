@@ -5,7 +5,7 @@
 #include "Font.h"
 #include "Texture2D.h"
 #include "Object.h"
-
+#include "ServiceLocator.h"
 #include <SDL.h>
 #include <SDL_ttf.h>
 
@@ -24,7 +24,10 @@ TextComponent::TextComponent(const std::shared_ptr<Object>& object, const std::s
 	, m_Transform{}
 	, m_IsVisible{ true }
 {
-	m_pFont = ResourceManager::GetInstance().LoadFont(filepath, fontSize);
+	ResourceManager* resourceManager = ServiceLocator<ResourceManager>::getService();
+	Renderer* renderer = ServiceLocator<Renderer>::getService();
+
+	m_pFont = resourceManager->LoadFont(filepath, fontSize);
 
 	const SDL_Color color = { Uint8(r), Uint8(g), Uint8(b) };
 	const auto surf = TTF_RenderText_Blended(m_pFont->GetFont(), m_Text.c_str(), color);
@@ -32,7 +35,7 @@ TextComponent::TextComponent(const std::shared_ptr<Object>& object, const std::s
 	{
 		throw std::runtime_error(std::string("Render text failed: ") + SDL_GetError());
 	}
-	auto texture = SDL_CreateTextureFromSurface(Renderer::GetInstance().GetSDLRenderer(), surf);
+	auto texture = SDL_CreateTextureFromSurface(renderer->GetSDLRenderer(), surf);
 	if (texture == nullptr)
 	{
 		throw std::runtime_error(std::string("Create text texture from surface failed: ") + SDL_GetError());
@@ -43,7 +46,7 @@ TextComponent::TextComponent(const std::shared_ptr<Object>& object, const std::s
 	//offset transform to center texture
 	int width{};
 	int height{};
-	Renderer::GetInstance().GetTextureSize(*m_pTexture, width, height);
+	renderer->GetTextureSize(*m_pTexture, width, height);
 	m_Transform.SetPosition(Position2D{ -(float(width) / 2.f), -(float(height) / 2.f) });
 }
 
@@ -51,8 +54,9 @@ void TextComponent::Render()
 {
 	if (m_pTexture != nullptr && m_IsVisible)
 	{
+		Renderer* renderer = ServiceLocator<Renderer>::getService();
 		Transform objTrans{ m_pObject->GetTransform() };
-		Renderer::GetInstance().RenderTexture(*m_pTexture, objTrans.GetPosition().x + m_Transform.GetPosition().x, objTrans.GetPosition().y + m_Transform.GetPosition().y);
+		renderer->RenderTexture(*m_pTexture, objTrans.GetPosition().x + m_Transform.GetPosition().x, objTrans.GetPosition().y + m_Transform.GetPosition().y);
 	}
 }
 

@@ -3,7 +3,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
-
+#include "ServiceLocator.h"
 #include "Renderer.h"
 #include "Texture2D.h"
 #include "Font.h"
@@ -37,7 +37,8 @@ const std::shared_ptr<Texture2D>& ResourceManager::LoadTexture(const std::string
 	const auto fullPath = m_DataPath + file;
 	if (m_pTextures.find(file) == m_pTextures.end())
 	{
-		auto texture = IMG_LoadTexture(Renderer::GetInstance().GetSDLRenderer(), fullPath.c_str());
+		Renderer* renderer = ServiceLocator<Renderer>::getService();
+		auto texture = IMG_LoadTexture(renderer->GetSDLRenderer(), fullPath.c_str());
 		if (texture == nullptr)
 		{
 			throw std::runtime_error(std::string("Failed to load texture: ") + SDL_GetError());

@@ -3,6 +3,7 @@
 #include <SDL.h>
 #include "SceneManager.h"
 #include "Texture2D.h"
+#include "ServiceLocator.h"
 
 using namespace minigin;
 
@@ -34,7 +35,8 @@ void Renderer::Render() const
 {
 	SDL_RenderClear(m_Renderer);
 
-	SceneManager::GetInstance().Render();
+	SceneManager* sceneManager = ServiceLocator<SceneManager>::getService();
+	sceneManager->Render();
 	
 	SDL_RenderPresent(m_Renderer);
 }
