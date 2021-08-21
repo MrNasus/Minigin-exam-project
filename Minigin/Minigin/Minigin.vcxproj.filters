@@ -84,7 +84,6 @@
     <ClCompile Include="EventQueue.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventHandler.cpp" />
-    <ClCompile Include="ServiceLocator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Minigin.rc" />
