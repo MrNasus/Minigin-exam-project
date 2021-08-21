@@ -7,17 +7,9 @@
 namespace minigin
 {
 	class Scene;
-	class SceneManager final
+	class SceneManager final : public Singleton<SceneManager>
 	{
 	public:
-		SceneManager() = default;
-		~SceneManager() = default;
-
-		SceneManager(const SceneManager & other) = delete;
-		SceneManager(SceneManager && other) = delete;
-		SceneManager& operator=(const SceneManager & other) = delete;
-		SceneManager& operator=(SceneManager && other) = delete;
-
 		Scene& CreateScene(const std::string& name);
 		Scene& GetScene(const std::string& name);
 
@@ -26,6 +18,8 @@ namespace minigin
 		void Update(float deltaTime);
 		void Render();
 	private:
+		friend class Singleton<SceneManager>;
+		SceneManager() = default;
 		std::vector<std::shared_ptr<Scene>> m_pScenes;
 		std::shared_ptr<Scene> m_pCurrentScene;
 	};

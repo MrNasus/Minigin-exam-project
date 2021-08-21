@@ -11,17 +11,9 @@ namespace minigin
 	/**
 	 * Simple RAII wrapper for the SDL renderer
 	 */
-	class Renderer final
+	class Renderer final : public Singleton<Renderer>
 	{
 	public:
-		Renderer() = default;
-		~Renderer() = default;
-
-		Renderer(const Renderer & other) = delete;
-		Renderer(Renderer && other) = delete;
-		Renderer& operator=(const Renderer & other) = delete;
-		Renderer& operator=(Renderer && other) = delete;
-
 		void Init(SDL_Window* window);
 		void Render() const;
 		void Destroy();

@@ -4,7 +4,6 @@
 #include "ResourceManager.h"
 #include "Object.h"
 #include "Texture2D.h"
-#include "ServiceLocator.h"
 #include <SDL.h>
 
 using namespace minigin;
@@ -17,15 +16,12 @@ SpriteComponent::SpriteComponent(const std::shared_ptr<Object>& object, const st
 	,m_FrameHeight{}
 	,m_IsVisible{true}
 	,m_NrOfFrames{nrOfFrames}
-	,m_pTexture{ nullptr }
+	,m_pTexture{ ResourceManager::GetInstance().LoadTexture(filename) }
 	,m_SecPerFrame{loopTime / nrOfFrames}
 	,m_TextureHeight{}
 	,m_TextureWidth{}
 	,m_Transform{}
 {
-	ResourceManager* resourceManager = ServiceLocator<ResourceManager>::getService();
-	m_pTexture = resourceManager->LoadTexture(filename);
-
 	SDL_QueryTexture(m_pTexture->GetSDLTexture(), nullptr, nullptr, &m_TextureWidth, &m_TextureHeight);
 	m_FrameWidth = m_TextureWidth / m_NrOfFrames;
 	m_FrameHeight = m_TextureHeight;
@@ -56,9 +52,7 @@ void SpriteComponent::Render()
 		Rectangle dst = { objTrans.GetPosition().x + m_Transform.GetPosition().x, objTrans.GetPosition().y + m_Transform.GetPosition().y, float(m_FrameWidth), float(m_FrameHeight) };
 		Rectangle src = { float(m_FrameWidth * m_CurrentFrame), 0.f, float(m_FrameWidth), float(m_FrameHeight) };
 		
-		Renderer* renderer = ServiceLocator<Renderer>::getService();
-
-		renderer->RenderTexture(*m_pTexture, src, dst, m_Transform.GetRotation().z + objTrans.GetRotation().z);
+		Renderer::GetInstance().RenderTexture(*m_pTexture, src, dst, m_Transform.GetRotation().z + objTrans.GetRotation().z);
 	}
 }
 

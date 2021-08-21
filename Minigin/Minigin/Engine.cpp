@@ -9,7 +9,6 @@
 #include <SDL.h>
 #include "Scene.h"
 #include "Game.h"
-#include "ServiceLocator.h"
 
 using namespace std;
 using namespace std::chrono;
@@ -50,12 +49,7 @@ void Engine::Initialize()
 		throw std::runtime_error(std::string("SDL_CreateWindow Error: ") + SDL_GetError());
 	}
 
-	ServiceLocator<Renderer>::provide(new Renderer{});
-	Renderer* renderer = ServiceLocator<Renderer>::getService();
-	renderer->Init(m_Window);
-
-	ServiceLocator<ResourceManager>::provide(new ResourceManager{});
-	ServiceLocator<SceneManager>::provide(new SceneManager{});
+	Renderer::GetInstance().Init(m_Window);
 }
 
 /**
@@ -69,8 +63,7 @@ void Engine::SetGame(Game* pGame)
 
 void Engine::Cleanup()
 {
-	Renderer* renderer = ServiceLocator<Renderer>::getService();
-	renderer->Destroy();
+	Renderer::GetInstance().Destroy();
 	SDL_DestroyWindow(m_Window);
 	m_Window = nullptr;
 	SDL_Quit();
@@ -80,14 +73,13 @@ void Engine::Run()
 {
 
 	// tell the resource manager where he can find the game data
-	ResourceManager* resourceManager = ServiceLocator<ResourceManager>::getService();
-	resourceManager->Init("../Data/");
+	ResourceManager::GetInstance().Init("../Data/");
 
 	m_pGame->Load();
 
-	Renderer* renderer = ServiceLocator<Renderer>::getService();
-	SceneManager* sceneManager = ServiceLocator<SceneManager>::getService();
-	InputManager* input = ServiceLocator<InputManager>::getService();
+	auto& renderer = Renderer::GetInstance();
+	auto& sceneManager = SceneManager::GetInstance();
+	auto& input = InputManager::GetInstance();
 
 	auto previousTime = high_resolution_clock::now();
 
@@ -96,9 +88,9 @@ void Engine::Run()
 	{
 		const auto currentTime = high_resolution_clock::now();
 
-		doContinue = input->ProcessInput();
-		sceneManager->Update(duration_cast<duration<float>>(currentTime - previousTime).count());
-		renderer->Render();
+		doContinue = input.ProcessInput();
+		sceneManager.Update(duration_cast<duration<float>>(currentTime - previousTime).count());
+		renderer.Render();
 
 		previousTime = currentTime;
 		auto sleepTime = duration_cast<duration<float>>(currentTime + milliseconds(MsPerFrame) - high_resolution_clock::now());

@@ -52,7 +52,6 @@
     <ClInclude Include="EventQueue.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="EventHandler.h" />
-    <ClInclude Include="ServiceLocator.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Font.cpp" />
