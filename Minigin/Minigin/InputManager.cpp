@@ -30,9 +30,8 @@ void InputManager::ProcessInput()
 	for (size_t i = 0; i < controllerSize; ++i)
 	{
 		m_PreviousControllerButtons[i] = m_ControllerButtons[i];
+		m_ControllerButtons[i] = false;
 	}
-
-	m_ControllerButtons.assign(m_ControllerButtons.size(), false);
 
 	ZeroMemory(&m_CurrentState, sizeof(XINPUT_STATE));
 	XInputGetState(0, &m_CurrentState);
@@ -71,9 +70,8 @@ void InputManager::ProcessInput()
 	for (size_t i = 0; i < keyboardSize; ++i)
 	{
 		m_PreviousKeyboardButtons[i] = m_KeyboardButtons[i];
+		m_KeyboardButtons[i] = false;
 	}
-
-	m_KeyboardButtons.assign(m_KeyboardButtons.size(), false);
 
 	SDL_Event e;
 	while (SDL_PollEvent(&e)) {
@@ -81,31 +79,34 @@ void InputManager::ProcessInput()
 		{
 			m_Quit = true;
 		}
-		if (e.key.keysym.scancode == SDL_SCANCODE_LEFT)
-		{
-			m_KeyboardButtons[size_t(KeyboardButton::Left)] = true;
-		}
-		if (e.key.keysym.scancode == SDL_SCANCODE_RIGHT)
-		{
-			m_KeyboardButtons[size_t(KeyboardButton::Right)] = true;
-		}
-		if (e.key.keysym.scancode == SDL_SCANCODE_UP) 
-		{
-			m_KeyboardButtons[size_t(KeyboardButton::Up)] = true;
-		}
-		if (e.key.keysym.scancode == SDL_SCANCODE_DOWN)
-		{
-			m_KeyboardButtons[size_t(KeyboardButton::Down)] = true;
-		}
-		if (e.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
-		{
-			m_KeyboardButtons[size_t(KeyboardButton::Escape)] = true;
-		}
-		if (e.key.keysym.scancode == SDL_SCANCODE_SPACE)
-		{
-			m_KeyboardButtons[size_t(KeyboardButton::Space)] = true;
-		}
 	}
+
+	const Uint8* pKeyboardState = SDL_GetKeyboardState(nullptr);
+	if (pKeyboardState[SDL_SCANCODE_LEFT])
+	{
+		m_KeyboardButtons[size_t(KeyboardButton::Left)] = true;
+	}
+	if (pKeyboardState[SDL_SCANCODE_RIGHT])
+	{
+		m_KeyboardButtons[size_t(KeyboardButton::Right)] = true;
+	}
+	if (pKeyboardState[SDL_SCANCODE_UP])
+	{
+		m_KeyboardButtons[size_t(KeyboardButton::Up)] = true;
+	}
+	if (pKeyboardState[SDL_SCANCODE_DOWN])
+	{
+		m_KeyboardButtons[size_t(KeyboardButton::Down)] = true;
+	}
+	if (pKeyboardState[SDL_SCANCODE_ESCAPE])
+	{
+		m_KeyboardButtons[size_t(KeyboardButton::Escape)] = true;
+	}
+	if (pKeyboardState[SDL_SCANCODE_SPACE])
+	{
+		m_KeyboardButtons[size_t(KeyboardButton::Space)] = true;
+	}
+
 
 	//update input bindings
 	for (auto it = m_InputBindings.begin(); it != m_InputBindings.end() ; ++it)

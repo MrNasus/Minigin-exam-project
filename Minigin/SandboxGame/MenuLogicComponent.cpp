@@ -28,17 +28,17 @@ MenuLogicComponent::MenuLogicComponent(const std::shared_ptr<minigin::Object>& o
 		}
 
 	}
-}
 
-void MenuLogicComponent::Awake()
-{
-	
 	InputBinding bindingUp{ 0, InputTriggerState::Pressed, ControllerButton::DpadUp, KeyboardButton::Up };
 	InputManager::GetInstance().AddInputBinding(bindingUp);
 	InputBinding bindingDown{ 1, InputTriggerState::Pressed, ControllerButton::DpadDown, KeyboardButton::Down };
 	InputManager::GetInstance().AddInputBinding(bindingDown);
 	InputBinding bindingSelect{ 2, InputTriggerState::Released, ControllerButton::ButtonA, KeyboardButton::Space };
 	InputManager::GetInstance().AddInputBinding(bindingSelect);
+}
+
+void MenuLogicComponent::Awake()
+{
 }
 
 void MenuLogicComponent::Update([[maybe_unused]] float deltaTime)
