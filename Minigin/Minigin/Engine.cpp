@@ -50,6 +50,7 @@ void Engine::Initialize()
 	}
 
 	Renderer::GetInstance().Init(m_Window);
+	InputManager::GetInstance().Init();
 }
 
 /**
@@ -83,12 +84,13 @@ void Engine::Run()
 
 	auto previousTime = high_resolution_clock::now();
 
-	bool doContinue = true;
-	while (doContinue)
+	bool quit = false;
+	while (!quit)
 	{
 		const auto currentTime = high_resolution_clock::now();
 
-		doContinue = input.ProcessInput();
+		input.ProcessInput();
+		quit = input.GetQuit();
 		sceneManager.Update(duration_cast<duration<float>>(currentTime - previousTime).count());
 		renderer.Render();
 
