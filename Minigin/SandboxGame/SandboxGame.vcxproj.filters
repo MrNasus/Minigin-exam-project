@@ -18,10 +18,10 @@
     <ClCompile Include="PlayerControllerComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="BullletComponent.cpp">
+    <ClCompile Include="BulletManagerComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="BulletManagerComponent.cpp">
+    <ClCompile Include="BulletComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
   </ItemGroup>
@@ -43,10 +43,10 @@
     <ClInclude Include="PlayerControllerComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="BullletComponent.h">
+    <ClInclude Include="BulletManagerComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="BulletManagerComponent.h">
+    <ClInclude Include="BulletComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>

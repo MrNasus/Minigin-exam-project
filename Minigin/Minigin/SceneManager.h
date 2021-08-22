@@ -11,7 +11,7 @@ namespace minigin
 	{
 	public:
 		Scene& CreateScene(const std::string& name);
-		bool GetScene(const std::string& name, std::shared_ptr<Scene> pScene);
+		bool GetScene(const std::string& name, std::shared_ptr<Scene>& pScene);
 		bool RemoveScene(const std::string& name);
 		void SetCurrentScene(const std::string& name);
 

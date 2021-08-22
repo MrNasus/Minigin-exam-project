@@ -2,6 +2,7 @@
 #include "SceneManager.h"
 #include "Scene.h"
 #include "ResourceManager.h"
+#include "Renderer.h"
 #include "Object.h"
 #include "TextureComponent.h"
 #include "MoveComponent.h"
@@ -12,6 +13,7 @@
 #include "GameLogicComponent.h"
 #include "PlayerControllerComponent.h"
 #include "HitboxCircleComponent.h"
+#include "HitboxRectangleComponent.h"
 #include <memory>
 #include <iostream>
 #include <vector>
@@ -135,6 +137,14 @@ void SandboxGame::LoadGame(Gamemode gamemode, bool reload)
 		gameLogic->AddComponent(std::make_shared<GameLogicComponent>(gameLogic));
 		game.Add(gameLogic);
 
+		std::shared_ptr<Object> bulletManager = std::make_shared<Object>();
+		int w, h;
+		Renderer::GetInstance().GetWindowSize(w, h);
+		std::shared_ptr<HitboxRectangleComponent> wHitbox = std::make_shared<HitboxRectangleComponent>(bulletManager, float(w), float(h), float(w) / 2.f, float(h) / 2.f);
+		bulletManager->AddComponent(wHitbox);
+		bulletManager->AddComponent(std::make_shared<BulletManagerComponent>(bulletManager, 20, wHitbox));
+		game.Add(bulletManager);
+
 		std::shared_ptr<Object> starfighter1 = std::make_shared<Object>();
 		std::shared_ptr<Object> starfighter2 = std::make_shared<Object>();
 
@@ -143,7 +153,7 @@ void SandboxGame::LoadGame(Gamemode gamemode, bool reload)
 		{
 		case Gamemode::Singleplayer:
 			starfighter1->AddComponent(std::make_shared<TextureComponent>(starfighter1, "StarfighterWhite.png"));
-			starfighter1->AddComponent(std::make_shared<PlayerControllerComponent>(starfighter1, true, true));
+			starfighter1->AddComponent(std::make_shared<PlayerControllerComponent>(starfighter1, bulletManager->GetComponent<BulletManagerComponent>(), true, true));
 			starfighter1->AddComponent(std::make_shared<HitboxCircleComponent>(starfighter1, 13.f));
 			t.SetPosition(Position2D{ 320.f, 440.f });
 			starfighter1->SetTransform(t);
@@ -152,14 +162,14 @@ void SandboxGame::LoadGame(Gamemode gamemode, bool reload)
 			break;
 		case Gamemode::Multiplayer:
 			starfighter1->AddComponent(std::make_shared<TextureComponent>(starfighter1, "StarfighterWhite.png"));
-			starfighter1->AddComponent(std::make_shared<PlayerControllerComponent>(starfighter1, false, true));
+			starfighter1->AddComponent(std::make_shared<PlayerControllerComponent>(starfighter1, bulletManager->GetComponent<BulletManagerComponent>(), false, true));
 			starfighter1->AddComponent(std::make_shared<HitboxCircleComponent>(starfighter1, 13.f));
 			t.SetPosition(Position2D{ 320.f, 440.f });
 			starfighter1->SetTransform(t);
 			game.Add(starfighter1);
 
 			starfighter2->AddComponent(std::make_shared<TextureComponent>(starfighter2, "StarfighterWhite.png"));
-			starfighter2->AddComponent(std::make_shared<PlayerControllerComponent>(starfighter2, false, false));
+			starfighter2->AddComponent(std::make_shared<PlayerControllerComponent>(starfighter2, bulletManager->GetComponent<BulletManagerComponent>(), false, false));
 			starfighter2->AddComponent(std::make_shared<HitboxCircleComponent>(starfighter2, 13.f));
 			t.SetPosition(Position2D{ 320.f, 440.f });
 			starfighter2->SetTransform(t);
@@ -168,7 +178,7 @@ void SandboxGame::LoadGame(Gamemode gamemode, bool reload)
 			break;
 		case Gamemode::Versus:
 			starfighter1->AddComponent(std::make_shared<TextureComponent>(starfighter1, "StarfighterWhite.png"));
-			starfighter1->AddComponent(std::make_shared<PlayerControllerComponent>(starfighter1, false, true));
+			starfighter1->AddComponent(std::make_shared<PlayerControllerComponent>(starfighter1, bulletManager->GetComponent<BulletManagerComponent>(), false, true));
 			starfighter1->AddComponent(std::make_shared<HitboxCircleComponent>(starfighter1, 13.f));
 			t.SetPosition(Position2D{ 320.f, 440.f });
 			starfighter1->SetTransform(t);

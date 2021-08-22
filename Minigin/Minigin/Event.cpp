@@ -13,7 +13,7 @@ Event::Event(const Event& other)
 {
 }
 
-minigin::Event::Event(Event&& other)
+Event::Event(Event&& other)
 	: m_Name{ other.m_Name }
 {
 }
@@ -24,7 +24,7 @@ Event& Event::operator=(const Event& other)
 	return *this;
 }
 
-Event& minigin::Event::operator=(Event&& other)
+Event& Event::operator=(Event&& other)
 {
 	m_Name = other.m_Name;
 	return *this;

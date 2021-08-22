@@ -48,7 +48,12 @@ void Renderer::Destroy()
 	}
 }
 
-void minigin::Renderer::GetTextureSize(const Texture2D& texture, int& width, int& height) const
+void Renderer::GetWindowSize(int& width, int& height) const
+{
+	SDL_GetWindowSize(m_Window, &width, &height);
+}
+
+void Renderer::GetTextureSize(const Texture2D& texture, int& width, int& height) const
 {
 	SDL_QueryTexture(texture.GetSDLTexture(), nullptr, nullptr, &width, &height);
 }

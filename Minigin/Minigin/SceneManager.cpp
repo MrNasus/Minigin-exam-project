@@ -37,7 +37,7 @@ Scene& SceneManager::CreateScene(const std::string& name)
 	return *scene;
 }
 
-bool SceneManager::GetScene(const std::string& name, std::shared_ptr<Scene> pScene)
+bool SceneManager::GetScene(const std::string& name, std::shared_ptr<Scene>& pScene)
 {
 	for (size_t i{}; i < m_pScenes.size(); ++i)
 	{
@@ -53,7 +53,7 @@ bool SceneManager::GetScene(const std::string& name, std::shared_ptr<Scene> pSce
 	return false;
 }
 
-bool minigin::SceneManager::RemoveScene(const std::string& name)
+bool SceneManager::RemoveScene(const std::string& name)
 {
 	for (size_t i{}; i < m_pScenes.size(); ++i)
 	{

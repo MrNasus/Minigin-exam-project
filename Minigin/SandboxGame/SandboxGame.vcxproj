@@ -173,7 +173,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BulletManagerComponent.cpp" />
-    <ClCompile Include="BullletComponent.cpp" />
+    <ClCompile Include="BulletComponent.cpp" />
     <ClCompile Include="GameLogicComponent.cpp" />
     <ClCompile Include="MenuLogicComponent.cpp" />
     <ClCompile Include="PlayerControllerComponent.cpp" />
@@ -184,7 +184,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BulletManagerComponent.h" />
-    <ClInclude Include="BullletComponent.h" />
+    <ClInclude Include="BulletComponent.h" />
     <ClInclude Include="GameLogicComponent.h" />
     <ClInclude Include="Gamemode.h" />
     <ClInclude Include="MenuLogicComponent.h" />

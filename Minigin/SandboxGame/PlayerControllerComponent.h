@@ -1,11 +1,12 @@
 #pragma once
 #include <BaseComponent.h>
 #include "HitboxCircleComponent.h"
+#include "BulletManagerComponent.h"
 
 class PlayerControllerComponent : public minigin::BaseComponent
 {
 public:
-	PlayerControllerComponent(const std::weak_ptr<minigin::Object>& object, bool isSingleplayer, bool isFirstPlayer = true, const std::string& componentName = "none");
+	PlayerControllerComponent(const std::weak_ptr<minigin::Object>& object, const std::shared_ptr<BulletManagerComponent>& pBulletManager, bool isSingleplayer, bool isFirstPlayer = true, const std::string& componentName = "none");
 	virtual ~PlayerControllerComponent() = default;
 	PlayerControllerComponent(const PlayerControllerComponent& other) = delete;
 	PlayerControllerComponent(PlayerControllerComponent&& other) = delete;
@@ -25,7 +26,9 @@ private:
 	float m_RightWindowLimit;
 	float m_ShootCD;
 	float m_AccuShotTime;
+	float m_BulletSpeed;
 
 	std::shared_ptr<minigin::HitboxCircleComponent> m_pHitbox;
+	std::shared_ptr<BulletManagerComponent> m_pBulletManager;
 };
 

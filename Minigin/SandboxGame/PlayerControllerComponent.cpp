@@ -2,11 +2,12 @@
 #include "InputManager.h"
 #include "Object.h"
 #include "Transform.h"
+#include "Renderer.h"
 #include <iostream>
 
 using namespace minigin;
 
-PlayerControllerComponent::PlayerControllerComponent(const std::weak_ptr<minigin::Object>& object, bool isSingleplayer, bool isFirstPlayer, const std::string& componentName)
+PlayerControllerComponent::PlayerControllerComponent(const std::weak_ptr<minigin::Object>& object, const std::shared_ptr<BulletManagerComponent>& pBulletManager, bool isSingleplayer, bool isFirstPlayer, const std::string& componentName)
 	:BaseComponent(object, componentName)
 	,m_MoveLeftId{}
 	,m_MoveRightId{}
@@ -16,7 +17,14 @@ PlayerControllerComponent::PlayerControllerComponent(const std::weak_ptr<minigin
 	,m_FlySpeed{400.f}
 	,m_ShootCD{0.4f}
 	,m_AccuShotTime{0.f}
+	,m_BulletSpeed{400.f}
+	,m_pBulletManager{pBulletManager}
 {
+	int w, h;
+	float windowBorder = 30.f;
+	Renderer::GetInstance().GetWindowSize(w, h);
+	m_LeftWindowLimit = windowBorder;
+	m_RightWindowLimit = float(w) - windowBorder;
 	m_pHitbox = m_pObject.lock()->GetComponent<HitboxCircleComponent>();
 	if (isSingleplayer)
 	{
@@ -91,8 +99,8 @@ void PlayerControllerComponent::Update(float deltaTime)
 	{
 		if (m_AccuShotTime >= m_ShootCD)
 		{
-			m_AccuShotTime = 0.f;
-			std::cout << "pew\n";
+ 			m_AccuShotTime = 0.f;
+			m_pBulletManager->CreateBullet(Position2D{ 0.f, -m_BulletSpeed }, m_pObject.lock()->GetTransform().GetPosition(), true);
 		}
 	}
 

@@ -18,6 +18,8 @@ namespace minigin
 		void Render() const;
 		void Destroy();
 
+		void GetWindowSize(int& width, int& height) const;
+
 		void GetTextureSize(const Texture2D& texture, int& width, int& height) const;
 
 		void RenderTexture(const Texture2D& texture, float x, float y) const;

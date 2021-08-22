@@ -46,7 +46,7 @@ bool EventQueue::PopEvent(Event& event)
 	return true;
 }
 
-const std::vector<Event>& minigin::EventQueue::GetPendingQueue()
+const std::vector<Event>& EventQueue::GetPendingQueue()
 {
 	if (!m_IsPendingQueueUpdated)
 	{

@@ -66,22 +66,22 @@ void SpriteComponent::SetTransform(const Transform& transform)
 	m_Transform = transform;
 }
 
-int minigin::SpriteComponent::GetFrameHeight() const
+int SpriteComponent::GetFrameHeight() const
 {
 	return m_FrameHeight;
 }
 
-int minigin::SpriteComponent::GetFrameWidth() const
+int SpriteComponent::GetFrameWidth() const
 {
 	return m_FrameWidth;
 }
 
-float minigin::SpriteComponent::GetTextureHeight() const
+float SpriteComponent::GetTextureHeight() const
 {
 	return float(m_TextureHeight);
 }
 
-void minigin::SpriteComponent::SetFrameHeight(int height)
+void SpriteComponent::SetFrameHeight(int height)
 {
 	m_FrameHeight = height;
 }

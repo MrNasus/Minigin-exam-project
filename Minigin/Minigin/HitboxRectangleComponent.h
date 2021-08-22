@@ -7,6 +7,7 @@ namespace minigin
 {
 	class HitboxRectangleComponent : public BaseComponent
 	{
+	public:
 		HitboxRectangleComponent(const std::weak_ptr<Object>& object, const std::string& componentName = "none");
 		HitboxRectangleComponent(const std::weak_ptr<Object>& object, float width, float height, const std::string& componentName = "none");
 		HitboxRectangleComponent(const std::weak_ptr<Object>& object, float width, float height, float offsetX, float offsetY, const std::string& componentName = "none");
@@ -21,6 +22,7 @@ namespace minigin
 
 		void SetHitboxSize(float newWidth, float newHeight);
 		void SetHitboxOffset(float offsetX, float offsetY);
+		Rectangle GetHitbox() const;
 
 		bool IsOverlapping(const Position2D & point) const;
 		bool IsOverlapping(const Circle & hitbox) const;
