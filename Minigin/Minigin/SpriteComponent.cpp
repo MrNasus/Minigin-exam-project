@@ -8,7 +8,7 @@
 
 using namespace minigin;
 
-SpriteComponent::SpriteComponent(const std::shared_ptr<Object>& object, const std::string& filename, int nrOfFrames, float loopTime, const std::string& componentName)
+SpriteComponent::SpriteComponent(const std::weak_ptr<Object>& object, const std::string& filename, int nrOfFrames, float loopTime, const std::string& componentName)
 	:BaseComponent(object, componentName)
 	,m_AccuSec{}
 	,m_CurrentFrame{}
@@ -48,7 +48,7 @@ void SpriteComponent::Render()
 {
 	if (m_pTexture != nullptr && m_IsVisible)
 	{
-		Transform objTrans{ m_pObject->GetTransform() };
+		Transform objTrans{ m_pObject.lock()->GetTransform() };
 		Rectangle dst = { objTrans.GetPosition().x + m_Transform.GetPosition().x, objTrans.GetPosition().y + m_Transform.GetPosition().y, float(m_FrameWidth), float(m_FrameHeight) };
 		Rectangle src = { float(m_FrameWidth * m_CurrentFrame), 0.f, float(m_FrameWidth), float(m_FrameHeight) };
 		

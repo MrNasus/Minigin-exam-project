@@ -10,15 +10,14 @@ namespace minigin
 	class TextComponent : public BaseComponent
 	{
 	public:
-		TextComponent(const std::shared_ptr<Object>& object, const std::string& text, const std::string& filepath, int fontSize, const std::string& componentName = "none");
-		TextComponent(const std::shared_ptr<Object>& object, const std::string& text, const std::string& filepath, int fontSize, int r, int g, int b, const std::string& componentName = "none");
+		TextComponent(const std::weak_ptr<Object>& object, const std::string& text, const std::string& filepath, int fontSize, const std::string& componentName = "none");
+		TextComponent(const std::weak_ptr<Object>& object, const std::string& text, const std::string& filepath, int fontSize, int r, int g, int b, const std::string& componentName = "none");
 		virtual ~TextComponent() = default;
 		TextComponent(const TextComponent& other) = delete;
 		TextComponent(TextComponent&& other) = delete;
 		TextComponent& operator=(const TextComponent& other) = delete;
 		TextComponent& operator=(TextComponent&& other) = delete;
 
-		virtual void Awake() override {};
 		virtual void Update([[maybe_unused]] float deltaTime) override {};
 		virtual void Render() override;
 

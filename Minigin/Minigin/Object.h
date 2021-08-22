@@ -50,7 +50,6 @@ namespace minigin
 			return nullptr;
 		}
 
-		void Awake();
 		void Update(float deltaTime);
 		void Render();
 	protected:

@@ -7,14 +7,13 @@
 class MenuLogicComponent : public minigin::BaseComponent
 {
 public:
-	MenuLogicComponent(const std::shared_ptr<minigin::Object>& object, const std::vector<std::shared_ptr<minigin::Object>>& buttons, const std::string& componentName = "none");
+	MenuLogicComponent(const std::weak_ptr<minigin::Object>& object, const std::vector<std::shared_ptr<minigin::Object>>& buttons, const std::string& componentName = "none");
 	virtual ~MenuLogicComponent() = default;
 	MenuLogicComponent(const MenuLogicComponent& other) = delete;
 	MenuLogicComponent(MenuLogicComponent&& other) = delete;
 	MenuLogicComponent& operator=(const MenuLogicComponent& other) = delete;
 	MenuLogicComponent& operator=(MenuLogicComponent&& other) = delete;
 
-	virtual void Awake() override;
 	virtual void Update([[maybe_unused]]float deltaTime) override;
 	virtual void Render() override {};
 

@@ -9,6 +9,9 @@
 #include "SpriteComponent.h"
 #include "SceneSwapComponent.h"
 #include "MenuLogicComponent.h"
+#include "GameLogicComponent.h"
+#include "PlayerControllerComponent.h"
+#include "HitboxCircleComponent.h"
 #include <memory>
 #include <iostream>
 #include <vector>
@@ -31,52 +34,48 @@ void SandboxGame::Load()
 	LoadMainMenu();
 	LoadPauseMenu();
 
+	LoadGame(Gamemode::Multiplayer, true);
 	//GAME
 	Transform t{};
 
-	Scene& game = SceneManager::GetInstance().CreateScene("Game");
+	//Scene& game = SceneManager::GetInstance().CreateScene("Game");
 
-	std::shared_ptr<Object> starfighter = std::make_shared<Object>();
-	starfighter->AddComponent(std::make_shared<TextureComponent>(starfighter, "StarfighterWhite.png"));
-	t.SetPosition(Position2D{ 320.f, 440.f });
-	starfighter->SetTransform(t);
-	game.Add(starfighter);
 
-	std::shared_ptr<Object> starfighterExplosion = std::make_shared<Object>();
-	starfighterExplosion->AddComponent(std::make_shared<SpriteComponent>(starfighterExplosion, "StarfighterExplosion.png", 4, 0.6f));
-	t.SetPosition(Position2D{ 270.f, 440.f });
-	starfighterExplosion->SetTransform(t);
-	game.Add(starfighterExplosion);
+	//std::shared_ptr<Object> starfighterExplosion = std::make_shared<Object>();
+	//starfighterExplosion->AddComponent(std::make_shared<SpriteComponent>(starfighterExplosion, "StarfighterExplosion.png", 4, 0.6f));
+	//t.SetPosition(Position2D{ 270.f, 440.f });
+	//starfighterExplosion->SetTransform(t);
+	//game.Add(starfighterExplosion);
 
-	std::shared_ptr<Object> boss = std::make_shared<Object>();
-	boss->AddComponent(std::make_shared<SpriteComponent>(boss, "BossGreen.png", 2, 0.4f));
-	t.SetPosition(Position2D{ 320.f, 40.f });
-	boss->SetTransform(t);
-	game.Add(boss);
+	//std::shared_ptr<Object> boss = std::make_shared<Object>();
+	//boss->AddComponent(std::make_shared<SpriteComponent>(boss, "BossGreen.png", 2, 0.4f));
+	//t.SetPosition(Position2D{ 320.f, 40.f });
+	//boss->SetTransform(t);
+	//game.Add(boss);
 
-	std::shared_ptr<Object> bossDamaged = std::make_shared<Object>();
-	bossDamaged->AddComponent(std::make_shared<SpriteComponent>(bossDamaged, "BossBlue.png", 2, 0.4f));
-	t.SetPosition(Position2D{ 280.f, 40.f });
-	bossDamaged->SetTransform(t);
-	game.Add(bossDamaged);
+	//std::shared_ptr<Object> bossDamaged = std::make_shared<Object>();
+	//bossDamaged->AddComponent(std::make_shared<SpriteComponent>(bossDamaged, "BossBlue.png", 2, 0.4f));
+	//t.SetPosition(Position2D{ 280.f, 40.f });
+	//bossDamaged->SetTransform(t);
+	//game.Add(bossDamaged);
 
-	std::shared_ptr<Object> goei = std::make_shared<Object>();
-	goei->AddComponent(std::make_shared<SpriteComponent>(goei, "Goei.png", 2, 0.4f));
-	t.SetPosition(Position2D{ 320.f, 80.f });
-	goei->SetTransform(t);
-	game.Add(goei);
+	//std::shared_ptr<Object> goei = std::make_shared<Object>();
+	//goei->AddComponent(std::make_shared<SpriteComponent>(goei, "Goei.png", 2, 0.4f));
+	//t.SetPosition(Position2D{ 320.f, 80.f });
+	//goei->SetTransform(t);
+	//game.Add(goei);
 
-	std::shared_ptr<Object> zako = std::make_shared<Object>();
-	zako->AddComponent(std::make_shared<SpriteComponent>(zako, "Zako.png", 2, 0.4f));
-	t.SetPosition(Position2D{ 320.f, 120.f });
-	zako->SetTransform(t);
-	game.Add(zako);
+	//std::shared_ptr<Object> zako = std::make_shared<Object>();
+	//zako->AddComponent(std::make_shared<SpriteComponent>(zako, "Zako.png", 2, 0.4f));
+	//t.SetPosition(Position2D{ 320.f, 120.f });
+	//zako->SetTransform(t);
+	//game.Add(zako);
 
-	std::shared_ptr<Object> galagaExplosion = std::make_shared<Object>();
-	galagaExplosion->AddComponent(std::make_shared<SpriteComponent>(galagaExplosion, "GalagaExplosion.png", 5, 0.25f));
-	t.SetPosition(Position2D{ 270.f, 100.f });
-	galagaExplosion->SetTransform(t);
-	game.Add(galagaExplosion);
+	//std::shared_ptr<Object> galagaExplosion = std::make_shared<Object>();
+	//galagaExplosion->AddComponent(std::make_shared<SpriteComponent>(galagaExplosion, "GalagaExplosion.png", 5, 0.25f));
+	//t.SetPosition(Position2D{ 270.f, 100.f });
+	//galagaExplosion->SetTransform(t);
+	//game.Add(galagaExplosion);
 
 
 
@@ -115,7 +114,7 @@ void SandboxGame::Load()
 
 
 
-	SceneManager::GetInstance().SetCurrentScene("PauseMenu");
+	SceneManager::GetInstance().SetCurrentScene("MainMenu");
 
 	std::cout << "Sandbox game loaded\n";
 }
@@ -129,20 +128,51 @@ void SandboxGame::LoadGame(Gamemode gamemode, bool reload)
 	std::shared_ptr<Scene> scene = nullptr;
 	if (!SceneManager::GetInstance().GetScene("Game", scene))
 	{
+		Transform t{};
+
 		Scene& game = SceneManager::GetInstance().CreateScene("Game");
 		std::shared_ptr<Object> gameLogic = std::make_shared<Object>();
-		gameLogic->AddComponent(std::shared_ptr<>()
+		gameLogic->AddComponent(std::make_shared<GameLogicComponent>(gameLogic));
 		game.Add(gameLogic);
+
+		std::shared_ptr<Object> starfighter1 = std::make_shared<Object>();
+		std::shared_ptr<Object> starfighter2 = std::make_shared<Object>();
+
 
 		switch (gamemode)
 		{
 		case Gamemode::Singleplayer:
+			starfighter1->AddComponent(std::make_shared<TextureComponent>(starfighter1, "StarfighterWhite.png"));
+			starfighter1->AddComponent(std::make_shared<PlayerControllerComponent>(starfighter1, true, true));
+			starfighter1->AddComponent(std::make_shared<HitboxCircleComponent>(starfighter1, 13.f));
+			t.SetPosition(Position2D{ 320.f, 440.f });
+			starfighter1->SetTransform(t);
+			game.Add(starfighter1);
 
 			break;
 		case Gamemode::Multiplayer:
+			starfighter1->AddComponent(std::make_shared<TextureComponent>(starfighter1, "StarfighterWhite.png"));
+			starfighter1->AddComponent(std::make_shared<PlayerControllerComponent>(starfighter1, false, true));
+			starfighter1->AddComponent(std::make_shared<HitboxCircleComponent>(starfighter1, 13.f));
+			t.SetPosition(Position2D{ 320.f, 440.f });
+			starfighter1->SetTransform(t);
+			game.Add(starfighter1);
+
+			starfighter2->AddComponent(std::make_shared<TextureComponent>(starfighter2, "StarfighterWhite.png"));
+			starfighter2->AddComponent(std::make_shared<PlayerControllerComponent>(starfighter2, false, false));
+			starfighter2->AddComponent(std::make_shared<HitboxCircleComponent>(starfighter2, 13.f));
+			t.SetPosition(Position2D{ 320.f, 440.f });
+			starfighter2->SetTransform(t);
+			game.Add(starfighter2);
 
 			break;
 		case Gamemode::Versus:
+			starfighter1->AddComponent(std::make_shared<TextureComponent>(starfighter1, "StarfighterWhite.png"));
+			starfighter1->AddComponent(std::make_shared<PlayerControllerComponent>(starfighter1, false, true));
+			starfighter1->AddComponent(std::make_shared<HitboxCircleComponent>(starfighter1, 13.f));
+			t.SetPosition(Position2D{ 320.f, 440.f });
+			starfighter1->SetTransform(t);
+			game.Add(starfighter1);
 
 			break;
 		default:

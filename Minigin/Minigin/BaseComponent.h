@@ -8,14 +8,13 @@ namespace minigin
 	class BaseComponent
 	{
 	public:
-		BaseComponent(const std::shared_ptr<Object>& object, const std::string& name) { m_pObject = object; m_Name = name; };
+		BaseComponent(const std::weak_ptr<Object>& object, const std::string& name) { m_pObject = object; m_Name = name; };
 		virtual ~BaseComponent() = default;
 		BaseComponent(const BaseComponent& other) = delete;
 		BaseComponent(BaseComponent&& other) = delete;
 		BaseComponent& operator=(const BaseComponent& other) = delete;
 		BaseComponent& operator=(BaseComponent&& other) = delete;
 
-		virtual void Awake() = 0;
 		virtual void Update(float deltaTime) = 0;
 		virtual void Render() = 0;
 
@@ -23,6 +22,6 @@ namespace minigin
 	protected:
 
 		std::string m_Name;
-		std::shared_ptr<Object> m_pObject;
+		std::weak_ptr<Object> m_pObject;
 	};
 }

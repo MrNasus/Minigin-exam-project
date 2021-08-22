@@ -11,12 +11,12 @@
 
 using namespace minigin;
 
-TextComponent::TextComponent(const std::shared_ptr<Object>& object, const std::string& text, const std::string& filepath, int fontSize, const std::string& componentName)
+TextComponent::TextComponent(const std::weak_ptr<Object>& object, const std::string& text, const std::string& filepath, int fontSize, const std::string& componentName)
 	:TextComponent(object, text, filepath, fontSize, 255, 255, 255, componentName)
 {
 }
 
-TextComponent::TextComponent(const std::shared_ptr<Object>& object, const std::string& text, const std::string& filepath, int fontSize, int r, int g, int b, const std::string& componentName)
+TextComponent::TextComponent(const std::weak_ptr<Object>& object, const std::string& text, const std::string& filepath, int fontSize, int r, int g, int b, const std::string& componentName)
 	:BaseComponent(object, componentName)
 	, m_pFont{ nullptr }
 	, m_pTexture{}
@@ -51,7 +51,7 @@ void TextComponent::Render()
 {
 	if (m_pTexture != nullptr && m_IsVisible)
 	{
-		Transform objTrans{ m_pObject->GetTransform() };
+		Transform objTrans{ m_pObject.lock()->GetTransform() };
 		Renderer::GetInstance().RenderTexture(*m_pTexture, objTrans.GetPosition().x + m_Transform.GetPosition().x, objTrans.GetPosition().y + m_Transform.GetPosition().y);
 	}
 }

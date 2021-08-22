@@ -4,17 +4,17 @@
 
 using namespace minigin;
 
-HitboxCircleComponent::HitboxCircleComponent(const std::shared_ptr<Object>& object, const std::string& componentName)
+HitboxCircleComponent::HitboxCircleComponent(const std::weak_ptr<Object>& object, const std::string& componentName)
 	:HitboxCircleComponent(object, 0.f, 0.f, 0.f, componentName)
 {
 }
 
-HitboxCircleComponent::HitboxCircleComponent(const std::shared_ptr<Object>& object, float size, const std::string& componentName)
+HitboxCircleComponent::HitboxCircleComponent(const std::weak_ptr<Object>& object, float size, const std::string& componentName)
 	:HitboxCircleComponent(object, size, 0.f, 0.f, componentName)
 {
 }
 
-HitboxCircleComponent::HitboxCircleComponent(const std::shared_ptr<Object>& object, float size, float offsetX, float offsetY, const std::string& componentName)
+HitboxCircleComponent::HitboxCircleComponent(const std::weak_ptr<Object>& object, float size, float offsetX, float offsetY, const std::string& componentName)
 	:BaseComponent(object, componentName)
 	,m_Hitbox{offsetX, offsetY, size}
 {

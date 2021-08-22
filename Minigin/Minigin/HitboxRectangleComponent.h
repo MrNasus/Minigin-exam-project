@@ -7,16 +7,15 @@ namespace minigin
 {
 	class HitboxRectangleComponent : public BaseComponent
 	{
-		HitboxRectangleComponent(const std::shared_ptr<Object>& object, const std::string& componentName = "none");
-		HitboxRectangleComponent(const std::shared_ptr<Object>& object, float width, float height, const std::string& componentName = "none");
-		HitboxRectangleComponent(const std::shared_ptr<Object>& object, float width, float height, float offsetX, float offsetY, const std::string& componentName = "none");
+		HitboxRectangleComponent(const std::weak_ptr<Object>& object, const std::string& componentName = "none");
+		HitboxRectangleComponent(const std::weak_ptr<Object>& object, float width, float height, const std::string& componentName = "none");
+		HitboxRectangleComponent(const std::weak_ptr<Object>& object, float width, float height, float offsetX, float offsetY, const std::string& componentName = "none");
 		virtual ~HitboxRectangleComponent() = default;
 		HitboxRectangleComponent(const HitboxRectangleComponent& other) = delete;
 		HitboxRectangleComponent(HitboxRectangleComponent&& other) = delete;
 		HitboxRectangleComponent& operator=(const HitboxRectangleComponent& other) = delete;
 		HitboxRectangleComponent& operator=(HitboxRectangleComponent&& other) = delete;
 
-		virtual void Awake() override {};
 		virtual void Update([[maybe_unused]] float deltaTime) override {};
 		virtual void Render() override {};
 

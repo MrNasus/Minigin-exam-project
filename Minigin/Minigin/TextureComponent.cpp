@@ -6,7 +6,7 @@
 
 using namespace minigin;
 
-TextureComponent::TextureComponent(const std::shared_ptr<Object>& object, const std::string& filename, const std::string& componentName)
+TextureComponent::TextureComponent(const std::weak_ptr<Object>& object, const std::string& filename, const std::string& componentName)
 	: BaseComponent{ object, componentName}
 	, m_pTexture{ ResourceManager::GetInstance().LoadTexture(filename) }
 	, m_IsVisible{true}
@@ -23,7 +23,7 @@ void TextureComponent::Render()
 {
 	if (m_pTexture != nullptr && m_IsVisible)
 	{
-		Transform objTrans{ m_pObject->GetTransform() };
+		Transform objTrans{ m_pObject.lock()->GetTransform() };
 		Renderer::GetInstance().RenderTexture(*m_pTexture, objTrans.GetPosition().x + m_Transform.GetPosition().x, objTrans.GetPosition().y + m_Transform.GetPosition().y);
 	}
 }

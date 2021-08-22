@@ -4,7 +4,7 @@
 
 using namespace minigin;
 
-MenuLogicComponent::MenuLogicComponent(const std::shared_ptr<minigin::Object>& object,const std::vector<std::shared_ptr<minigin::Object>>& buttons, const std::string& componentName)
+MenuLogicComponent::MenuLogicComponent(const std::weak_ptr<minigin::Object>& object,const std::vector<std::shared_ptr<minigin::Object>>& buttons, const std::string& componentName)
 	:BaseComponent(object, componentName)
 	,m_ActiveButton{}
 	,m_pActiveButtonVisuals{}
@@ -35,10 +35,6 @@ MenuLogicComponent::MenuLogicComponent(const std::shared_ptr<minigin::Object>& o
 	InputManager::GetInstance().AddInputBinding(bindingDown);
 	InputBinding bindingSelect{ 2, InputTriggerState::Released, ControllerButton::ButtonA, KeyboardButton::Space };
 	InputManager::GetInstance().AddInputBinding(bindingSelect);
-}
-
-void MenuLogicComponent::Awake()
-{
 }
 
 void MenuLogicComponent::Update([[maybe_unused]] float deltaTime)

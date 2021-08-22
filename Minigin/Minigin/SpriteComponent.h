@@ -11,14 +11,13 @@ namespace minigin
     {
 	public:
 		//only supports horizontal sprites
-		SpriteComponent(const std::shared_ptr<Object>& object, const std::string& filename, int nrOfFrames, float loopTime, const std::string& componentName = "none");
+		SpriteComponent(const std::weak_ptr<Object>& object, const std::string& filename, int nrOfFrames, float loopTime, const std::string& componentName = "none");
 		virtual ~SpriteComponent() = default;
 		SpriteComponent(const SpriteComponent& other) = delete;
 		SpriteComponent(SpriteComponent&& other) = delete;
 		SpriteComponent& operator=(const SpriteComponent& other) = delete;
 		SpriteComponent& operator=(SpriteComponent&& other) = delete;
 
-		virtual void Awake() override {};
 		virtual void Update(float deltaTime) override;
 		virtual void Render() override;
 

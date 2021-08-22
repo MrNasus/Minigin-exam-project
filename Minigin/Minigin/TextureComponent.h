@@ -9,14 +9,13 @@ namespace minigin
 	class TextureComponent : public BaseComponent
 	{
 	public:
-		TextureComponent(const std::shared_ptr<Object>& object, const std::string& filename, const std::string& componentName = "none");
+		TextureComponent(const std::weak_ptr<Object>& object, const std::string& filename, const std::string& componentName = "none");
 		virtual ~TextureComponent() = default;
 		TextureComponent(const TextureComponent& other) = delete;
 		TextureComponent(TextureComponent&& other) = delete;
 		TextureComponent& operator=(const TextureComponent& other) = delete;
 		TextureComponent& operator=(TextureComponent&& other) = delete;
 
-		virtual void Awake() override {};
 		virtual void Update([[maybe_unused]] float deltaTime) override {};
 		virtual void Render() override;
 

@@ -55,14 +55,6 @@ void Object::RemoveComponent(const std::shared_ptr<BaseComponent>& pComponent)
 	m_pComponents.erase(it);
 }
 
-void Object::Awake()
-{
-	for (auto pComponent : m_pComponents)
-	{
-		pComponent->Awake();
-	}
-}
-
 void Object::Update(float deltaTime)
 {
 	for (auto pComponent : m_pComponents)
