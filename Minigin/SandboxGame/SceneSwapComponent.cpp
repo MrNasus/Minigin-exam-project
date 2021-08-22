@@ -1,5 +1,6 @@
 #include "SceneSwapComponent.h"
 #include "SceneManager.h"
+#include "SandboxGame.h"
 
 using namespace minigin;
 
@@ -11,5 +12,14 @@ SceneSwapComponent::SceneSwapComponent(const std::shared_ptr<minigin::Object>& o
 
 void SceneSwapComponent::Swap() const
 {
+	SceneManager::GetInstance().SetCurrentScene(m_SceneName);
+}
+
+void SceneSwapComponent::Swap(Gamemode gamemode, bool reload) const
+{
+	if (m_SceneName == "Game")
+	{
+
+	}
 	SceneManager::GetInstance().SetCurrentScene(m_SceneName);
 }

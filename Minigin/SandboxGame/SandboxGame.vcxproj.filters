@@ -24,6 +24,7 @@
     <ClInclude Include="MenuLogicComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="Gamemode.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">

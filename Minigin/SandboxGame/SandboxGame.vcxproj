@@ -179,6 +179,7 @@
     <ClCompile Include="SandboxGame.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Gamemode.h" />
     <ClInclude Include="MenuLogicComponent.h" />
     <ClInclude Include="SceneSwapComponent.h" />
     <ClInclude Include="MoveComponent.h" />

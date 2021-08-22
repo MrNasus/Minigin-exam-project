@@ -19,10 +19,13 @@ Scene& SceneManager::CreateScene(const std::string& name)
 {
 	for (size_t i{}; i < m_pScenes.size(); ++i)
 	{
-		if (m_pScenes[i].get()->GetName() == name)
+		if (m_pScenes[i] != nullptr)
 		{
-			std::cout << std::string{ "scene with name: " + name + " already exists\n" };
-			return *m_pScenes[i].get();
+			if (m_pScenes[i].get()->GetName() == name)
+			{
+				std::cout << std::string{ "scene with name: " + name + " already exists\n" };
+				return *m_pScenes[i].get();
+			}
 		}
 	}
 	const auto& scene = std::shared_ptr<Scene>(new Scene(name));
@@ -34,16 +37,36 @@ Scene& SceneManager::CreateScene(const std::string& name)
 	return *scene;
 }
 
-Scene& SceneManager::GetScene(const std::string& name)
+bool SceneManager::GetScene(const std::string& name, std::shared_ptr<Scene> pScene)
 {
 	for (size_t i{}; i < m_pScenes.size(); ++i)
 	{
-		if (m_pScenes[i].get()->GetName() == name)
+		if (m_pScenes[i] != nullptr)
 		{
-			return *m_pScenes[i].get();
+			if (m_pScenes[i].get()->GetName() == name)
+			{
+				pScene = m_pScenes[i];
+				return true;
+			}
 		}
 	}
-	return *m_pScenes[0].get();
+	return false;
+}
+
+bool minigin::SceneManager::RemoveScene(const std::string& name)
+{
+	for (size_t i{}; i < m_pScenes.size(); ++i)
+	{
+		if (m_pScenes[i] != nullptr)
+		{
+			if (m_pScenes[i].get()->GetName() == name)
+			{
+				m_pScenes[i] = nullptr;
+				return true;
+			}
+		}
+	}
+	return false;
 }
 
 void SceneManager::SetCurrentScene(const std::string& name)
@@ -54,10 +77,13 @@ void SceneManager::SetCurrentScene(const std::string& name)
 	}
 	for (size_t i{}; i < m_pScenes.size(); ++i)
 	{
-		if (m_pScenes[i].get()->GetName() == name)
+		if (m_pScenes[i] != nullptr)
 		{
-			m_pCurrentScene = m_pScenes[i];
-			return;
+			if (m_pScenes[i].get()->GetName() == name)
+			{
+				m_pCurrentScene = m_pScenes[i];
+				return;
+			}
 		}
 	}
 	std::cout << std::string{ "scene with name: " + name + " not found\n" };

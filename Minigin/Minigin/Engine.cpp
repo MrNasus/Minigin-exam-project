@@ -64,6 +64,7 @@ void Engine::SetGame(Game* pGame)
 
 void Engine::Cleanup()
 {
+	delete m_pGame;
 	Renderer::GetInstance().Destroy();
 	SDL_DestroyWindow(m_Window);
 	m_Window = nullptr;

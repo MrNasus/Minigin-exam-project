@@ -1,5 +1,7 @@
 #pragma once
 #include <BaseComponent.h>
+#include "Gamemode.h"
+
 class SceneSwapComponent : public minigin::BaseComponent
 {
 public:
@@ -14,6 +16,7 @@ public:
 	virtual void Update([[maybe_unused]]float deltaTime) override {};
 	virtual void Render() override {};
 	void Swap() const;
+	void Swap(Gamemode gamemode, bool reload) const;
 private:
 	std::string m_SceneName;
 };
