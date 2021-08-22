@@ -22,14 +22,14 @@ namespace minigin
 		void AddComponent(const std::shared_ptr<BaseComponent>& pNewComponent);
 		void RemoveComponent(const std::shared_ptr<BaseComponent>& pComponent);
 		template <class T>
-		std::weak_ptr<T> GetComponent()
+		const std::shared_ptr<T>& GetComponent()
 		{
 			const type_info& ti = typeid(T);
 			for (std::shared_ptr<BaseComponent> component : m_pComponents)
 			{
 				if (component && typeid(*component) == ti)
 				{
-					return std::weak_ptr<T> = component;
+					return component;
 				}
 			}
 
@@ -37,14 +37,14 @@ namespace minigin
 		}
 
 		template <class T>
-		std::weak_ptr<T> GetComponent(const std::string& name)
+		const std::shared_ptr<T>& GetComponent(const std::string& name)
 		{
 			const type_info& ti = typeid(T);
 			for (std::shared_ptr<BaseComponent> component : m_pComponents)
 			{
 				if (component->GetName() == name)
 				{
-					return std::weak_ptr<T> = component;
+					return component;
 				}
 			}
 

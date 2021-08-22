@@ -145,45 +145,45 @@ void SandboxGame::LoadMainMenu()
 	mainMenu.Add(galagaTitle);
 
 	std::shared_ptr<Object> singleplayerButton = std::make_shared<Object>();
-	singleplayerButton->AddComponent(std::make_shared<TextComponent>(singleplayerButton, "SINGLEPLAYER", "Emulogic.ttf", 24, 220, 220, 220, "unselectedVisual"));
-	singleplayerButton->AddComponent(std::make_shared<TextComponent>(singleplayerButton, "SINGLEPLAYER", "Emulogic.ttf", 30, 5, 100, 50, "selectedVisual"));
+	singleplayerButton->AddComponent(std::make_shared<TextComponent>(singleplayerButton, "SINGLEPLAYER", "Emulogic.ttf", 24, 220, 220, 220, "UnselectedVisual"));
+	singleplayerButton->AddComponent(std::make_shared<TextComponent>(singleplayerButton, "SINGLEPLAYER", "Emulogic.ttf", 30, 5, 100, 50, "SelectedVisual"));
 	singleplayerButton->AddComponent(std::make_shared<SceneSwapComponent>(singleplayerButton, "SingleplayerGame"));
 	t.SetPosition(Position2D{ 320.f, 270.f });
 	singleplayerButton->SetTransform(t);
 	mainMenu.Add(singleplayerButton);
 
 	std::shared_ptr<Object> multiplayerButton = std::make_shared<Object>();
-	multiplayerButton->AddComponent(std::make_shared<TextComponent>(multiplayerButton, "MULTIPLAYER", "Emulogic.ttf", 24, 220, 220, 220, "unselectedVisual"));
-	multiplayerButton->AddComponent(std::make_shared<TextComponent>(multiplayerButton, "MULTIPLAYER", "Emulogic.ttf", 30, 5, 100, 50, "selectedVisual"));
-	singleplayerButton->AddComponent(std::make_shared<SceneSwapComponent>(singleplayerButton, "MultiplayerGame"));
+	multiplayerButton->AddComponent(std::make_shared<TextComponent>(multiplayerButton, "MULTIPLAYER", "Emulogic.ttf", 24, 220, 220, 220, "UnselectedVisual"));
+	multiplayerButton->AddComponent(std::make_shared<TextComponent>(multiplayerButton, "MULTIPLAYER", "Emulogic.ttf", 30, 5, 100, 50, "SelectedVisual"));
+	multiplayerButton->AddComponent(std::make_shared<SceneSwapComponent>(multiplayerButton, "MultiplayerGame"));
 	t.SetPosition(Position2D{ 320.f, 320.f });
 	multiplayerButton->SetTransform(t);
 	mainMenu.Add(multiplayerButton);
 
 	std::shared_ptr<Object> versusButton = std::make_shared<Object>();
-	versusButton->AddComponent(std::make_shared<TextComponent>(versusButton, "VERSUS", "Emulogic.ttf", 24, 220, 220, 220, "unselectedVisual"));
-	versusButton->AddComponent(std::make_shared<TextComponent>(versusButton, "VERSUS", "Emulogic.ttf", 30, 5, 100, 50, "selectedVisual"));
-	singleplayerButton->AddComponent(std::make_shared<SceneSwapComponent>(singleplayerButton, "VersusGame"));
+	versusButton->AddComponent(std::make_shared<TextComponent>(versusButton, "VERSUS", "Emulogic.ttf", 24, 220, 220, 220, "UnselectedVisual"));
+	versusButton->AddComponent(std::make_shared<TextComponent>(versusButton, "VERSUS", "Emulogic.ttf", 30, 5, 100, 50, "SelectedVisual"));
+	versusButton->AddComponent(std::make_shared<SceneSwapComponent>(versusButton, "VersusGame"));
 	t.SetPosition(Position2D{ 320.f, 370.f });
 	versusButton->SetTransform(t);
 	mainMenu.Add(versusButton);
 
 	std::shared_ptr<Object> quitButton = std::make_shared<Object>();
-	quitButton->AddComponent(std::make_shared<TextComponent>(quitButton, "QUIT", "Emulogic.ttf", 24, 220, 220, 220, "unselectedVisual"));
-	quitButton->AddComponent(std::make_shared<TextComponent>(quitButton, "QUIT", "Emulogic.ttf", 30, 5, 100, 50, "selectedVisual"));
-	singleplayerButton->AddComponent(std::make_shared<SceneSwapComponent>(singleplayerButton, "Quit"));
+	quitButton->AddComponent(std::make_shared<TextComponent>(quitButton, "QUIT", "Emulogic.ttf", 24, 220, 220, 220, "UnselectedVisual"));
+	quitButton->AddComponent(std::make_shared<TextComponent>(quitButton, "QUIT", "Emulogic.ttf", 30, 5, 100, 50, "SelectedVisual"));
+	quitButton->AddComponent(std::make_shared<SceneSwapComponent>(quitButton, "Quit"));
 	t.SetPosition(Position2D{ 320.f, 420.f });
 	quitButton->SetTransform(t);
 	mainMenu.Add(quitButton);
 
-	std::vector<std::weak_ptr<Object>> pButtons{};
+	std::vector<std::shared_ptr<Object>> pButtons{};
 	pButtons.push_back(singleplayerButton);
 	pButtons.push_back(multiplayerButton);
 	pButtons.push_back(versusButton);
 	pButtons.push_back(quitButton);
 
 	std::shared_ptr<Object> menuLogic = std::make_shared<Object>();
-	menuLogic->AddComponent(std::make_shared<MenuLogicComponent>(menuLogic, pButtons));
+	//menuLogic->AddComponent(std::make_shared<MenuLogicComponent>(menuLogic, pButtons));
 	mainMenu.Add(menuLogic);
 }
 

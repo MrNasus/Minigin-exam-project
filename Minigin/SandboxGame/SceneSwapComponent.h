@@ -11,7 +11,7 @@ public:
 	SceneSwapComponent& operator=(SceneSwapComponent&& other) = delete;
 
 	virtual void Awake() override {};
-	virtual void Update(float deltaTime) override;
+	virtual void Update([[maybe_unused]]float deltaTime) override {};
 	virtual void Render() override {};
 	void Swap() const;
 private:
