@@ -8,9 +8,9 @@ namespace minigin
 	class HitboxCircleComponent : public BaseComponent
 	{
 	public:
-		HitboxCircleComponent(const std::shared_ptr<Object>& object);
-		HitboxCircleComponent(const std::shared_ptr<Object>& object, float size);
-		HitboxCircleComponent(const std::shared_ptr<Object>& object, float size, float offsetX, float offsetY);
+		HitboxCircleComponent(const std::shared_ptr<Object>& object, const std::string& componentName = "none");
+		HitboxCircleComponent(const std::shared_ptr<Object>& object, float size, const std::string& componentName = "none");
+		HitboxCircleComponent(const std::shared_ptr<Object>& object, float size, float offsetX, float offsetY, const std::string& componentName = "none");
 		virtual ~HitboxCircleComponent() = default;
 		HitboxCircleComponent(const HitboxCircleComponent& other) = delete;
 		HitboxCircleComponent(HitboxCircleComponent&& other) = delete;

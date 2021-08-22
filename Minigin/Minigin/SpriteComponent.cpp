@@ -8,8 +8,8 @@
 
 using namespace minigin;
 
-SpriteComponent::SpriteComponent(const std::shared_ptr<Object>& object, const std::string& filename, int nrOfFrames, float loopTime)
-	:BaseComponent(object)
+SpriteComponent::SpriteComponent(const std::shared_ptr<Object>& object, const std::string& filename, int nrOfFrames, float loopTime, const std::string& componentName)
+	:BaseComponent(object, componentName)
 	,m_AccuSec{}
 	,m_CurrentFrame{}
 	,m_FrameWidth{}

@@ -1,5 +1,6 @@
 #include "MiniginPCH.h"
 #include "SceneManager.h"
+#include "InputManager.h"
 #include "Scene.h"
 
 using namespace minigin;
@@ -47,6 +48,10 @@ Scene& SceneManager::GetScene(const std::string& name)
 
 void SceneManager::SetCurrentScene(const std::string& name)
 {
+	if (name == "Quit")
+	{
+		InputManager::GetInstance().SetQuit(true);
+	}
 	for (size_t i{}; i < m_pScenes.size(); ++i)
 	{
 		if (m_pScenes[i].get()->GetName() == name)

@@ -9,7 +9,7 @@ namespace minigin
 	class TextureComponent : public BaseComponent
 	{
 	public:
-		TextureComponent(const std::shared_ptr<Object>& object, const std::string& filename);
+		TextureComponent(const std::shared_ptr<Object>& object, const std::string& filename, const std::string& componentName = "none");
 		virtual ~TextureComponent() = default;
 		TextureComponent(const TextureComponent& other) = delete;
 		TextureComponent(TextureComponent&& other) = delete;

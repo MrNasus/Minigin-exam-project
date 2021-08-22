@@ -1,8 +1,10 @@
 #include "MoveComponent.h"
 #include "Object.h"
 
-MoveComponent::MoveComponent(const std::shared_ptr<Object>& object, const Position2D& speed)
-	:BaseComponent(object)
+using namespace minigin;
+
+MoveComponent::MoveComponent(const std::shared_ptr<Object>& object, const Position2D& speed, const std::string& componentName)
+	:BaseComponent(object, componentName)
 	,m_Speed{speed}
 {
 }

@@ -172,11 +172,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="SceneSwapComponent.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MenuLogicComponent.cpp" />
     <ClCompile Include="MoveComponent.cpp" />
     <ClCompile Include="SandboxGame.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="SceneSwapComponent.h" />
+    <ClInclude Include="MenuLogicComponent.h" />
     <ClInclude Include="MoveComponent.h" />
     <ClInclude Include="SandboxGame.h" />
   </ItemGroup>

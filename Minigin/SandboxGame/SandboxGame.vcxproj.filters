@@ -3,10 +3,31 @@
   <ItemGroup>
     <ClCompile Include="SandboxGame.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="MoveComponent.cpp" />
+    <ClCompile Include="MenuLogicComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneSwapComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SandboxGame.h" />
-    <ClInclude Include="MoveComponent.h" />
+    <ClInclude Include="MoveComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuLogicComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneSwapComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Components">
+      <UniqueIdentifier>{f3c195a8-924f-4a2d-b65c-d002329d17e6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

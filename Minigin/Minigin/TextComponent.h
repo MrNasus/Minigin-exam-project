@@ -10,8 +10,8 @@ namespace minigin
 	class TextComponent : public BaseComponent
 	{
 	public:
-		TextComponent(const std::shared_ptr<Object>& object, const std::string& text, const std::string& filepath, int fontSize);
-		TextComponent(const std::shared_ptr<Object>& object, const std::string& text, const std::string& filepath, int fontSize, int r, int g, int b);
+		TextComponent(const std::shared_ptr<Object>& object, const std::string& text, const std::string& filepath, int fontSize, const std::string& componentName = "none");
+		TextComponent(const std::shared_ptr<Object>& object, const std::string& text, const std::string& filepath, int fontSize, int r, int g, int b, const std::string& componentName = "none");
 		virtual ~TextComponent() = default;
 		TextComponent(const TextComponent& other) = delete;
 		TextComponent(TextComponent&& other) = delete;

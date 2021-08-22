@@ -7,8 +7,11 @@
 #include "MoveComponent.h"
 #include "TextComponent.h"
 #include "SpriteComponent.h"
+#include "SceneSwapComponent.h"
+#include "MenuLogicComponent.h"
 #include <memory>
 #include <iostream>
+#include <vector>
 
 using namespace minigin;
 
@@ -25,42 +28,11 @@ SandboxGame::~SandboxGame()
 
 void SandboxGame::Load()
 {
-	Transform t{};
-	//MAIN MENU
-	Scene& mainMenu = SceneManager::GetInstance().CreateScene("Menu");
-
-	std::shared_ptr<Object> galagaTitle = std::make_shared<Object>();
-	galagaTitle->AddComponent(std::make_shared<TextureComponent>(galagaTitle, "GalagaLogo.png"));
-	t.SetPosition(Position2D{ 320.f, 130.f });
-	galagaTitle->SetTransform(t);
-	mainMenu.Add(galagaTitle);
-
-	std::shared_ptr<Object> singleplayerButton = std::make_shared<Object>();
-	singleplayerButton->AddComponent(std::make_shared<TextComponent>(singleplayerButton, "SINGLEPLAYER", "Emulogic.ttf", 24, 220, 220, 220));
-	t.SetPosition(Position2D{ 320.f, 270.f });
-	singleplayerButton->SetTransform(t);
-	mainMenu.Add(singleplayerButton);
-
-	std::shared_ptr<Object> multiplayerButton = std::make_shared<Object>();
-	multiplayerButton->AddComponent(std::make_shared<TextComponent>(multiplayerButton, "MULTIPLAYER", "Emulogic.ttf", 24, 220, 220, 220));
-	t.SetPosition(Position2D{ 320.f, 320.f });
-	multiplayerButton->SetTransform(t);
-	mainMenu.Add(multiplayerButton);
-
-	std::shared_ptr<Object> versusButton = std::make_shared<Object>();
-	versusButton->AddComponent(std::make_shared<TextComponent>(versusButton, "VERSUS", "Emulogic.ttf", 24, 220, 220, 220));
-	t.SetPosition(Position2D{ 320.f, 370.f });
-	versusButton->SetTransform(t);
-	mainMenu.Add(versusButton);
-
-	std::shared_ptr<Object> quitButton = std::make_shared<Object>();
-	quitButton->AddComponent(std::make_shared<TextComponent>(quitButton, "QUIT", "Emulogic.ttf", 24, 220, 220, 220));
-	t.SetPosition(Position2D{ 320.f, 420.f });
-	quitButton->SetTransform(t);
-	mainMenu.Add(quitButton);
-
+	LoadMainMenu();
 	//GAME
-	Scene& game = SceneManager::GetInstance().CreateScene("Game");
+	Transform t{};
+
+	Scene& game = SceneManager::GetInstance().CreateScene("SingleplayerGame");
 
 	std::shared_ptr<Object> starfighter = std::make_shared<Object>();
 	starfighter->AddComponent(std::make_shared<TextureComponent>(starfighter, "StarfighterWhite.png"));
@@ -106,7 +78,7 @@ void SandboxGame::Load()
 
 
 	//PAUSE SCREEN
-	Scene& pauseMenu = SceneManager::GetInstance().CreateScene("Pause");
+	Scene& pauseMenu = SceneManager::GetInstance().CreateScene("PauseMenu");
 
 	std::shared_ptr<Object> resumeButton = std::make_shared<Object>();
 	resumeButton->AddComponent(std::make_shared<TextComponent>(resumeButton, "RESUME", "Emulogic.ttf", 30, 220, 220, 220));
@@ -121,41 +93,100 @@ void SandboxGame::Load()
 	pauseMenu.Add(menuButton);
 
 	//GAME END
-	Scene& GameEnd = SceneManager::GetInstance().CreateScene("End");
+	Scene& EndScreen = SceneManager::GetInstance().CreateScene("EndScreen");
 
 	std::shared_ptr<Object> galagaVisual = std::make_shared<Object>();
 	galagaVisual->AddComponent(std::make_shared<TextureComponent>(galagaVisual, "GalagaLogo.png"));
 	t.SetPosition(Position2D{ 320.f, 130.f });
 	galagaVisual->SetTransform(t);
-	GameEnd.Add(galagaVisual);
+	EndScreen.Add(galagaVisual);
 
 	std::shared_ptr<Object> resultVisual = std::make_shared<Object>();
 	resultVisual->AddComponent(std::make_shared<TextComponent>(resultVisual, "---RESULT---", "Emulogic.ttf", 24, 220, 220, 0));
 	t.SetPosition(Position2D{ 320.f, 270.f });
 	resultVisual->SetTransform(t);
-	GameEnd.Add(resultVisual);
+	EndScreen.Add(resultVisual);
 
 	std::shared_ptr<Object> totalShotsVisual = std::make_shared<Object>();
 	totalShotsVisual->AddComponent(std::make_shared<TextComponent>(totalShotsVisual, "TOTAL SHOTS: 100", "Emulogic.ttf", 24, 220, 220, 220));
 	t.SetPosition(Position2D{ 320.f, 320.f });
 	totalShotsVisual->SetTransform(t);
-	GameEnd.Add(totalShotsVisual);
+	EndScreen.Add(totalShotsVisual);
 
 	std::shared_ptr<Object> shotsHitVisual = std::make_shared<Object>();
 	shotsHitVisual->AddComponent(std::make_shared<TextComponent>(shotsHitVisual, "SHOTS HIT: 36", "Emulogic.ttf", 24, 220, 220, 220));
 	t.SetPosition(Position2D{ 320.f, 370.f });
 	shotsHitVisual->SetTransform(t);
-	GameEnd.Add(shotsHitVisual);
+	EndScreen.Add(shotsHitVisual);
 
 	std::shared_ptr<Object> hitMissVisual = std::make_shared<Object>();
 	hitMissVisual->AddComponent(std::make_shared<TextComponent>(hitMissVisual, "HIT MISS RATIO: 36%", "Emulogic.ttf", 24, 220, 220, 220));
 	t.SetPosition(Position2D{ 320.f, 420.f });
 	hitMissVisual->SetTransform(t);
-	GameEnd.Add(hitMissVisual);
+	EndScreen.Add(hitMissVisual);
 
 
 
-	SceneManager::GetInstance().SetCurrentScene("End");
+	SceneManager::GetInstance().SetCurrentScene("MainMenu");
 
 	std::cout << "Sandbox game loaded\n";
+}
+
+void SandboxGame::LoadMainMenu()
+{
+	Transform t{};
+	//MAIN MENU
+	Scene& mainMenu = SceneManager::GetInstance().CreateScene("MainMenu");
+
+	std::shared_ptr<Object> galagaTitle = std::make_shared<Object>();
+	galagaTitle->AddComponent(std::make_shared<TextureComponent>(galagaTitle, "GalagaLogo.png"));
+	t.SetPosition(Position2D{ 320.f, 130.f });
+	galagaTitle->SetTransform(t);
+	mainMenu.Add(galagaTitle);
+
+	std::shared_ptr<Object> singleplayerButton = std::make_shared<Object>();
+	singleplayerButton->AddComponent(std::make_shared<TextComponent>(singleplayerButton, "SINGLEPLAYER", "Emulogic.ttf", 24, 220, 220, 220, "unselectedVisual"));
+	singleplayerButton->AddComponent(std::make_shared<TextComponent>(singleplayerButton, "SINGLEPLAYER", "Emulogic.ttf", 30, 5, 100, 50, "selectedVisual"));
+	singleplayerButton->AddComponent(std::make_shared<SceneSwapComponent>(singleplayerButton, "SingleplayerGame"));
+	t.SetPosition(Position2D{ 320.f, 270.f });
+	singleplayerButton->SetTransform(t);
+	mainMenu.Add(singleplayerButton);
+
+	std::shared_ptr<Object> multiplayerButton = std::make_shared<Object>();
+	multiplayerButton->AddComponent(std::make_shared<TextComponent>(multiplayerButton, "MULTIPLAYER", "Emulogic.ttf", 24, 220, 220, 220, "unselectedVisual"));
+	multiplayerButton->AddComponent(std::make_shared<TextComponent>(multiplayerButton, "MULTIPLAYER", "Emulogic.ttf", 30, 5, 100, 50, "selectedVisual"));
+	singleplayerButton->AddComponent(std::make_shared<SceneSwapComponent>(singleplayerButton, "MultiplayerGame"));
+	t.SetPosition(Position2D{ 320.f, 320.f });
+	multiplayerButton->SetTransform(t);
+	mainMenu.Add(multiplayerButton);
+
+	std::shared_ptr<Object> versusButton = std::make_shared<Object>();
+	versusButton->AddComponent(std::make_shared<TextComponent>(versusButton, "VERSUS", "Emulogic.ttf", 24, 220, 220, 220, "unselectedVisual"));
+	versusButton->AddComponent(std::make_shared<TextComponent>(versusButton, "VERSUS", "Emulogic.ttf", 30, 5, 100, 50, "selectedVisual"));
+	singleplayerButton->AddComponent(std::make_shared<SceneSwapComponent>(singleplayerButton, "VersusGame"));
+	t.SetPosition(Position2D{ 320.f, 370.f });
+	versusButton->SetTransform(t);
+	mainMenu.Add(versusButton);
+
+	std::shared_ptr<Object> quitButton = std::make_shared<Object>();
+	quitButton->AddComponent(std::make_shared<TextComponent>(quitButton, "QUIT", "Emulogic.ttf", 24, 220, 220, 220, "unselectedVisual"));
+	quitButton->AddComponent(std::make_shared<TextComponent>(quitButton, "QUIT", "Emulogic.ttf", 30, 5, 100, 50, "selectedVisual"));
+	singleplayerButton->AddComponent(std::make_shared<SceneSwapComponent>(singleplayerButton, "Quit"));
+	t.SetPosition(Position2D{ 320.f, 420.f });
+	quitButton->SetTransform(t);
+	mainMenu.Add(quitButton);
+
+	std::vector<std::weak_ptr<Object>> pButtons{};
+	pButtons.push_back(singleplayerButton);
+	pButtons.push_back(multiplayerButton);
+	pButtons.push_back(versusButton);
+	pButtons.push_back(quitButton);
+
+	std::shared_ptr<Object> menuLogic = std::make_shared<Object>();
+	menuLogic->AddComponent(std::make_shared<MenuLogicComponent>(menuLogic, pButtons));
+	mainMenu.Add(menuLogic);
+}
+
+void SandboxGame::LoadPauseMenu()
+{
 }

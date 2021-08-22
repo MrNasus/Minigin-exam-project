@@ -3,18 +3,18 @@
 
 using namespace minigin;
 
-HitboxRectangleComponent::HitboxRectangleComponent(const std::shared_ptr<Object>& object)
-	:HitboxRectangleComponent(object, 0.f, 0.f, 0.f, 0.f)
+HitboxRectangleComponent::HitboxRectangleComponent(const std::shared_ptr<Object>& object, const std::string& componentName)
+	:HitboxRectangleComponent(object, 0.f, 0.f, 0.f, 0.f, componentName)
 {
 }
 
-HitboxRectangleComponent::HitboxRectangleComponent(const std::shared_ptr<Object>& object, float width, float height)
-	: HitboxRectangleComponent(object, width, height, 0.f, 0.f)
+HitboxRectangleComponent::HitboxRectangleComponent(const std::shared_ptr<Object>& object, float width, float height, const std::string& componentName)
+	: HitboxRectangleComponent(object, width, height, 0.f, 0.f, componentName)
 {
 }
 
-HitboxRectangleComponent::HitboxRectangleComponent(const std::shared_ptr<Object>& object, float width, float height, float offsetX, float offsetY)
-	:BaseComponent(object)
+HitboxRectangleComponent::HitboxRectangleComponent(const std::shared_ptr<Object>& object, float width, float height, float offsetX, float offsetY, const std::string& componentName)
+	:BaseComponent(object, componentName)
 	,m_Hitbox{offsetX, offsetY, width, height}
 {
 }

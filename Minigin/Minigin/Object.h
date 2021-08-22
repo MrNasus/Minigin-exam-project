@@ -36,6 +36,21 @@ namespace minigin
 			return nullptr;
 		}
 
+		template <class T>
+		std::weak_ptr<T> GetComponent(const std::string& name)
+		{
+			const type_info& ti = typeid(T);
+			for (std::shared_ptr<BaseComponent> component : m_pComponents)
+			{
+				if (component->GetName() == name)
+				{
+					return std::weak_ptr<T> = component;
+				}
+			}
+
+			return nullptr;
+		}
+
 		void Awake();
 		void Update(float deltaTime);
 		void Render();

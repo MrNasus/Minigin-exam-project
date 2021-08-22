@@ -7,5 +7,8 @@ public:
 	~SandboxGame();
 
 	void Load() override;
+private:
+	void LoadMainMenu();
+	void LoadPauseMenu();
 };
 

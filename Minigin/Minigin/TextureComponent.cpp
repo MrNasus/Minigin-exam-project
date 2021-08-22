@@ -6,8 +6,8 @@
 
 using namespace minigin;
 
-TextureComponent::TextureComponent(const std::shared_ptr<Object>& object, const std::string& filename)
-	: BaseComponent{ object }
+TextureComponent::TextureComponent(const std::shared_ptr<Object>& object, const std::string& filename, const std::string& componentName)
+	: BaseComponent{ object, componentName}
 	, m_pTexture{ ResourceManager::GetInstance().LoadTexture(filename) }
 	, m_IsVisible{true}
 	, m_Transform{}
