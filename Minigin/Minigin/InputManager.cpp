@@ -81,27 +81,27 @@ void InputManager::ProcessInput()
 		{
 			m_Quit = true;
 		}
-		if (e.key.keysym.sym == SDL_SCANCODE_LEFT) 
+		if (e.key.keysym.scancode == SDL_SCANCODE_LEFT)
 		{
 			m_KeyboardButtons[size_t(KeyboardButton::Left)] = true;
 		}
-		if (e.key.keysym.sym == SDL_SCANCODE_RIGHT) 
+		if (e.key.keysym.scancode == SDL_SCANCODE_RIGHT)
 		{
 			m_KeyboardButtons[size_t(KeyboardButton::Right)] = true;
 		}
-		if (e.key.keysym.sym == SDL_SCANCODE_UP) 
+		if (e.key.keysym.scancode == SDL_SCANCODE_UP) 
 		{
 			m_KeyboardButtons[size_t(KeyboardButton::Up)] = true;
 		}
-		if (e.key.keysym.sym == SDL_SCANCODE_DOWN) 
+		if (e.key.keysym.scancode == SDL_SCANCODE_DOWN)
 		{
 			m_KeyboardButtons[size_t(KeyboardButton::Down)] = true;
 		}
-		if (e.key.keysym.sym == SDL_SCANCODE_ESCAPE) 
+		if (e.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
 		{
 			m_KeyboardButtons[size_t(KeyboardButton::Escape)] = true;
 		}
-		if (e.key.keysym.sym == SDL_SCANCODE_SPACE) 
+		if (e.key.keysym.scancode == SDL_SCANCODE_SPACE)
 		{
 			m_KeyboardButtons[size_t(KeyboardButton::Space)] = true;
 		}

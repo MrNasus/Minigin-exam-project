@@ -1,8 +1,9 @@
 #pragma once
-#include <XInput.h>
 #include "Singleton.h"
 #include <vector>
 #include <unordered_map>
+#include <Windows.h>
+#include <XInput.h>
 
 namespace minigin
 {

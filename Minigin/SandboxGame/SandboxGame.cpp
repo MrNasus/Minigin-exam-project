@@ -183,7 +183,7 @@ void SandboxGame::LoadMainMenu()
 	pButtons.push_back(quitButton);
 
 	std::shared_ptr<Object> menuLogic = std::make_shared<Object>();
-	//menuLogic->AddComponent(std::make_shared<MenuLogicComponent>(menuLogic, pButtons));
+	menuLogic->AddComponent(std::make_shared<MenuLogicComponent>(menuLogic, pButtons));
 	mainMenu.Add(menuLogic);
 }
 
