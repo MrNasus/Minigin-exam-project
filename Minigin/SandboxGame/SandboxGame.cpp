@@ -14,6 +14,7 @@
 #include "PlayerControllerComponent.h"
 #include "HitboxCircleComponent.h"
 #include "HitboxRectangleComponent.h"
+#include "EnemyComponent.h"
 #include <memory>
 #include <iostream>
 #include <vector>
@@ -145,6 +146,20 @@ void SandboxGame::LoadGame(Gamemode gamemode, bool reload)
 		bulletManager->AddComponent(std::make_shared<BulletManagerComponent>(bulletManager, 20, wHitbox));
 		game.Add(bulletManager);
 
+		//enemies
+		std::shared_ptr<Object> boss = std::make_shared<Object>();
+		boss->AddComponent(std::make_shared<SpriteComponent>(boss, "BossGreen.png", 2, 0.4f, "HealthyVisual"));
+		boss->AddComponent(std::make_shared<SpriteComponent>(boss, "BossBlue.png", 2, 0.4f, "AliveVisual"));
+		boss->AddComponent(std::make_shared<SpriteComponent>(boss, "GalagaExplosion.png", 5, 0.25f, "ExplodingVisual"));
+		boss->AddComponent(std::make_shared<HitboxCircleComponent>(boss, 16.f));
+		boss->AddComponent(std::make_shared<EnemyComponent>(boss, bulletManager->GetComponent<BulletManagerComponent>(), EnemyComponent::EnemyType::Boss, 0.25f, false));
+		t.SetPosition(Position2D{ 320.f, 40.f });
+		boss->SetTransform(t);
+		game.Add(boss);
+
+		boss->GetComponent<EnemyComponent>()->Revive(Position2D{ 320.f, 40.f });
+
+		//players
 		std::shared_ptr<Object> starfighter1 = std::make_shared<Object>();
 		std::shared_ptr<Object> starfighter2 = std::make_shared<Object>();
 

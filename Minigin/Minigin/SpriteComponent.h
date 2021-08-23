@@ -31,6 +31,7 @@ namespace minigin
 		void SetFrameHeight(int height);
 
 		void SetVisible(bool isVisible);
+		void ResetClock();
 
 	private:
 		std::shared_ptr<Texture2D> m_pTexture{};

@@ -45,21 +45,24 @@ minigin::Rectangle HitboxRectangleComponent::GetHitbox() const
 
 bool HitboxRectangleComponent::IsOverlapping(const Position2D& point) const
 {
-	bool isXInside = m_Hitbox.x < point.x && m_Hitbox.x + m_Hitbox.width > point.x;
-	bool isYInside = m_Hitbox.y < point.y && m_Hitbox.y + m_Hitbox.height > point.y;
+	Rectangle actualHitbox{ GetHitbox() };
+	bool isXInside = actualHitbox.x < point.x && actualHitbox.x + actualHitbox.width > point.x;
+	bool isYInside = actualHitbox.y < point.y && actualHitbox.y + actualHitbox.height > point.y;
 	return isXInside && isYInside;
 }
 
 bool HitboxRectangleComponent::IsOverlapping(const Circle& hitbox) const
 {
-	bool isXInside = (m_Hitbox.x < hitbox.x + hitbox.size) && (m_Hitbox.x + m_Hitbox.width > hitbox.x - hitbox.size);
-	bool isYInside = (m_Hitbox.y < hitbox.y + hitbox.size) && (m_Hitbox.y + m_Hitbox.height > hitbox.y - hitbox.size);
+	Rectangle actualHitbox{ GetHitbox() };
+	bool isXInside = (actualHitbox.x < hitbox.x + hitbox.size) && (actualHitbox.x + actualHitbox.width > hitbox.x - hitbox.size);
+	bool isYInside = (actualHitbox.y < hitbox.y + hitbox.size) && (actualHitbox.y + actualHitbox.height > hitbox.y - hitbox.size);
 	return isXInside && isYInside;
 }
 
 bool HitboxRectangleComponent::IsOverlapping(const Rectangle& hitbox) const
 {
-	bool isXInside = (m_Hitbox.x < hitbox.x + hitbox.width) && (m_Hitbox.x + m_Hitbox.width > hitbox.x);
-	bool isYInside = (m_Hitbox.y < hitbox.y + hitbox.height) && (m_Hitbox.y + m_Hitbox.height > hitbox.y);
+	Rectangle actualHitbox{ GetHitbox() };
+	bool isXInside = (actualHitbox.x < hitbox.x + hitbox.width) && (actualHitbox.x + actualHitbox.width > hitbox.x);
+	bool isYInside = (actualHitbox.y < hitbox.y + hitbox.height) && (actualHitbox.y + actualHitbox.height > hitbox.y);
 	return isXInside && isYInside;
 }

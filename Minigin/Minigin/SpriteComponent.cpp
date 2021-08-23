@@ -90,3 +90,8 @@ void SpriteComponent::SetVisible(bool isVisible)
 {
 	m_IsVisible = isVisible;
 }
+
+void SpriteComponent::ResetClock()
+{
+	m_AccuSec = 0.f;
+}

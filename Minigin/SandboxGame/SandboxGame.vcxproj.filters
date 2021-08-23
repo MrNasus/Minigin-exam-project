@@ -24,6 +24,9 @@
     <ClCompile Include="BulletComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SandboxGame.h" />
@@ -46,9 +49,13 @@
     <ClInclude Include="BulletManagerComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
     <ClInclude Include="BulletComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyState.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">

@@ -20,6 +20,8 @@ namespace minigin
 		virtual void Update([[maybe_unused]] float deltaTime) override {};
 		virtual void Render() override {};
 
+		minigin::Circle GetHitbox() const;
+
 		void SetHitboxSize(float newSize);
 		void SetHitboxOffset(float offsetX, float offsetY);
 
