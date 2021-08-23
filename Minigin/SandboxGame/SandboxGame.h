@@ -14,5 +14,6 @@ public:
 private:
 	void LoadMainMenu();
 	void LoadPauseMenu();
+	void LoadGameOver();
 };
 

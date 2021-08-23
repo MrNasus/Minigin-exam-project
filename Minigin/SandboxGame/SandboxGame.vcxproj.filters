@@ -27,6 +27,12 @@
     <ClCompile Include="EnemyComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyManagerComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOverScreenComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SandboxGame.h" />
@@ -56,6 +62,12 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="EnemyState.h" />
+    <ClInclude Include="EnemyManagerComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverScreenComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">

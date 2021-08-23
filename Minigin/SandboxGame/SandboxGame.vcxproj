@@ -175,7 +175,9 @@
     <ClCompile Include="BulletManagerComponent.cpp" />
     <ClCompile Include="BulletComponent.cpp" />
     <ClCompile Include="EnemyComponent.cpp" />
+    <ClCompile Include="EnemyManagerComponent.cpp" />
     <ClCompile Include="GameLogicComponent.cpp" />
+    <ClCompile Include="GameOverScreenComponent.cpp" />
     <ClCompile Include="MenuLogicComponent.cpp" />
     <ClCompile Include="PlayerControllerComponent.cpp" />
     <ClCompile Include="SceneSwapComponent.cpp" />
@@ -187,9 +189,11 @@
     <ClInclude Include="BulletManagerComponent.h" />
     <ClInclude Include="BulletComponent.h" />
     <ClInclude Include="EnemyComponent.h" />
+    <ClInclude Include="EnemyManagerComponent.h" />
     <ClInclude Include="EnemyState.h" />
     <ClInclude Include="GameLogicComponent.h" />
     <ClInclude Include="Gamemode.h" />
+    <ClInclude Include="GameOverScreenComponent.h" />
     <ClInclude Include="MenuLogicComponent.h" />
     <ClInclude Include="PlayerControllerComponent.h" />
     <ClInclude Include="SceneSwapComponent.h" />

@@ -10,7 +10,7 @@ public:
 	GameLogicComponent& operator=(const GameLogicComponent& other) = delete;
 	GameLogicComponent& operator=(GameLogicComponent&& other) = delete;
 
-	virtual void Update([[maybe_unused]] float deltaTime) override {};
+	virtual void Update([[maybe_unused]] float deltaTime) override;
 	virtual void Render() override {};
 
 private:

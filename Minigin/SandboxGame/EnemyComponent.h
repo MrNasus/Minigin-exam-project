@@ -29,6 +29,7 @@ public:
 	virtual void Render() override {};
 
 	void SetState(EnemyState state, bool shoot = false);
+	const EnemyState& GetState() const;
 	void GetHit();
 
 	const std::shared_ptr<minigin::HitboxCircleComponent>& GetHitbox() const;

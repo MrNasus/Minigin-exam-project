@@ -89,7 +89,7 @@ void EnemyComponent::SetState(EnemyState state, bool shoot)
 {
 	if (shoot)
 	{
-		m_pBulletManager->CreateBullet({ float((rand() % 40) - 20), 300.f }, { m_pHitbox->GetHitbox().x, m_pHitbox->GetHitbox().y }, false);
+		m_pBulletManager->CreateBullet({ float((rand() % 100) - 50), 350.f }, { m_pHitbox->GetHitbox().x, m_pHitbox->GetHitbox().y }, false);
 	}
 	m_State = state;
 	Transform t{};
@@ -127,6 +127,11 @@ void EnemyComponent::SetState(EnemyState state, bool shoot)
 	}
 }
 
+const EnemyState& EnemyComponent::GetState() const
+{
+	return m_State;
+}
+
 void EnemyComponent::GetHit()
 {
 	--m_Health;
@@ -158,6 +163,7 @@ void EnemyComponent::Revive(const minigin::Position2D& position)
 	m_State = EnemyState::Idle;
 	Transform t{};
 	t.SetPosition(position);
+	m_OriginalPosition = position;
 	m_pObject.lock()->SetTransform(t);
 	switch (m_Type)
 	{
