@@ -1,7 +1,7 @@
 #include "Minigin.h"
-#include "SandboxGame.h"
+#include "Galaga.h"
 
 Game* CreateGame()
 {
-	return new SandboxGame();
+	return new Galaga();
 }

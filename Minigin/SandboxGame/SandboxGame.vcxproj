@@ -24,6 +24,7 @@
     <ProjectGuid>{1f014fe2-2f41-4d25-84c4-f897a436e0d1}</ProjectGuid>
     <RootNamespace>SandboxGame</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Galaga</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -183,7 +184,7 @@
     <ClCompile Include="SceneSwapComponent.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MoveComponent.cpp" />
-    <ClCompile Include="SandboxGame.cpp" />
+    <ClCompile Include="Galaga.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BulletManagerComponent.h" />
@@ -198,7 +199,7 @@
     <ClInclude Include="PlayerControllerComponent.h" />
     <ClInclude Include="SceneSwapComponent.h" />
     <ClInclude Include="MoveComponent.h" />
-    <ClInclude Include="SandboxGame.h" />
+    <ClInclude Include="Galaga.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

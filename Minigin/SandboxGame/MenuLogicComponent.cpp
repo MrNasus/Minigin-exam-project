@@ -46,7 +46,7 @@ void MenuLogicComponent::Update([[maybe_unused]] float deltaTime)
 		--m_ActiveButton;
 		if (m_ActiveButton < 0)
 		{
-			m_ActiveButton = m_pButtons.size() - 1;
+			m_ActiveButton = int(m_pButtons.size()) - 1;
 		}
 		m_pActiveButtonVisuals[m_ActiveButton]->SetVisible(true);
 		m_pInactiveButtonVisuals[m_ActiveButton]->SetVisible(false);

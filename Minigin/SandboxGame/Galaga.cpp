@@ -1,4 +1,4 @@
-#include "SandboxGame.h"
+#include "Galaga.h"
 #include "SceneManager.h"
 #include "Scene.h"
 #include "ResourceManager.h"
@@ -23,18 +23,18 @@
 
 using namespace minigin;
 
-SandboxGame::SandboxGame()
+Galaga::Galaga()
 	:Game()
 {
 
 }
 
-SandboxGame::~SandboxGame()
+Galaga::~Galaga()
 {
 
 }
 
-void SandboxGame::Load()
+void Galaga::Load()
 {
 	LoadMainMenu();
 	LoadPauseMenu();
@@ -44,7 +44,7 @@ void SandboxGame::Load()
 	SceneManager::GetInstance().SetCurrentScene("MainMenu");
 }
 
-void SandboxGame::LoadGame(Gamemode gamemode, bool reload)
+void Galaga::LoadGame(Gamemode gamemode, bool reload)
 {
 	if (reload)
 	{
@@ -131,7 +131,7 @@ void SandboxGame::LoadGame(Gamemode gamemode, bool reload)
 	SceneManager::GetInstance().SetCurrentScene("Game");
 }
 
-void SandboxGame::LoadMainMenu()
+void Galaga::LoadMainMenu()
 {
 	Transform t{};
 	//MAIN MENU
@@ -186,7 +186,7 @@ void SandboxGame::LoadMainMenu()
 	mainMenu.Add(menuLogic);
 }
 
-void SandboxGame::LoadPauseMenu()
+void Galaga::LoadPauseMenu()
 {
 	Transform t{};
 	//PAUSE SCREEN
@@ -218,7 +218,7 @@ void SandboxGame::LoadPauseMenu()
 
 }
 
-void SandboxGame::LoadGameOver()
+void Galaga::LoadGameOver()
 {
 	//GAME END
 	Scene& EndScreen = SceneManager::GetInstance().CreateScene("GameOverScreen");
